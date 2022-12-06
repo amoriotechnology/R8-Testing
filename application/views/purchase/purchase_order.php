@@ -69,7 +69,7 @@ textarea:focus, input:focus{
                                             {/all_supplier}
                                         </select>
                                     </div>
-                                     <a href="#" class="client-add-btn btn btn-info" aria-hidden="true" data-toggle="modal" data-target="#add_vendor"><i class="fa fa-user"></i></a>
+                                    <a href="#" class="client-add-btn btn btn-info" aria-hidden="true" id="model" data-toggle="modal" data-target="#add_vendor"><i class="fa fa-user"></i></a>
                                 </div> 
                             </div>
 
@@ -950,7 +950,8 @@ function addPurchaseOrderField2(divName){
     }
 }
 $( document ).ready(function() {
-                        $('.hiden').css("display","none");
+
+    $('.hiden').css("display","none");
 
   
 
@@ -1012,7 +1013,7 @@ function(data) {
 
 });
 
-  
+
   
 
     </script>

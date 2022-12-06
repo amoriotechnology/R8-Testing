@@ -23,86 +23,87 @@ class Csupplier extends CI_Controller {
     }
 
     //Insert supplier
-    public function insert_supplier() {
+        //Insert supplier
+        public function insert_supplier() {
        
-        $data = array(
-            'service_provider' => $this->input->post('service_provider',TRUE),
-            'category' => $this->input->post('vendor_type',TRUE),
-            'created_by'       =>  $this->session->userdata('user_id'),
-            'supplier_name' => $this->input->post('supplier_name',TRUE),
-            'address'       => $this->input->post('address',TRUE),
-            'address2'      => $this->input->post('address2',TRUE),
-            'mobile'        => $this->input->post('mobile',TRUE),
-            'phone'         => $this->input->post('phone',TRUE),
-            'contact'       => $this->input->post('contact',TRUE),
-            'emailnumber'   => $this->input->post('email',TRUE),
-            'email_address' => $this->input->post('emailaddress',TRUE),
-            'fax'           => $this->input->post('fax',TRUE),
-            'city'          => $this->input->post('city',TRUE),
-            'state'         => $this->input->post('state',TRUE),
-            'zip'           => $this->input->post('zip',TRUE),
-            'country'       => $this->input->post('country',TRUE),
-            'details'       => $this->input->post('details',TRUE),
-            'status'        => 1,
-            'currency_type'   => $this->input->post('currency1',TRUE)
-        );
+            $data = array(
+                'service_provider' => $this->input->post('service_provider',TRUE),
+                'category' => $this->input->post('vendor_type',TRUE),
+                'created_by'       =>  $this->session->userdata('user_id'),
+                'supplier_name' => $this->input->post('supplier_name',TRUE),
+                'address'       => $this->input->post('address',TRUE),
+                'address2'      => $this->input->post('address2',TRUE),
+                'mobile'        => $this->input->post('mobile',TRUE),
+                'phone'         => $this->input->post('phone',TRUE),
+                'contact'       => $this->input->post('contact',TRUE),
+                'emailnumber'   => $this->input->post('email',TRUE),
+                'email_address' => $this->input->post('emailaddress',TRUE),
+                'fax'           => $this->input->post('fax',TRUE),
+                'city'          => $this->input->post('city',TRUE),
+                'state'         => $this->input->post('state',TRUE),
+                'zip'           => $this->input->post('zip',TRUE),
+                'country'       => $this->input->post('country',TRUE),
+                'details'       => $this->input->post('details',TRUE),
+                'status'        => 1
+            );
+             
+            $this->db->insert('supplier_information',$data);
+    
+    
+                $supplier_id = $this->db->insert_id();
+              $coa = $this->Suppliers->headcode();
+            if($coa->HeadCode!=NULL){
+                $headcode=$coa->HeadCode+1;
+            }
+            else{
+                $headcode="502000001";
+            }
+                 $c_acc=$supplier_id.'-'.$this->input->post('supplier_name',TRUE);
+            $createby=$this->session->userdata('user_id');
+            $createdate=date('Y-m-d H:i:s');
+            $supplier_coa = [
+                  'HeadCode'       => $headcode,
+                'HeadName'         => $c_acc,
+                'PHeadName'        => 'Account Payable',
+                'HeadLevel'        => '3',
+                'IsActive'         => '1',
+                'IsTransaction'    => '1',
+                'IsGL'             => '0',
+                'HeadType'         => 'L',
+                'IsBudget'         => '0',
+                'supplier_id'      => $supplier_id,
+                'IsDepreciation'   => '0',
+                'DepreciationRate' => '0',
+                'CreateBy'         => $createby,
+                'CreateDate'       => $createdate,
+            ];
+                //Previous balance adding -> Sending to supplier model to adjust the data.
+                $this->db->insert('acc_coa',$supplier_coa);
+                $this->Suppliers->previous_balance_add($this->input->post('previous_balance',TRUE), $supplier_id,$c_acc,$this->input->post('supplier_name',TRUE));
+                
+                $this->session->set_userdata(array('message' => display('successfully_added')));
+                 if (isset($_POST['add-supplier-from-expense'])) {
+                    redirect(base_url('Ccpurchase/trucking'));
+                    exit;
+                }
+                if (isset($_POST['add-supplier-from-oit'])) {
+                    redirect(base_url('Ccpurchase/ocean_import_tracking'));
+                    exit;
+                }
+                if (isset($_POST['add-supplier-from-trucking-sale'])) {
+                    redirect(base_url('Cinvoice/trucking'));
+                    exit;
+                }
+                if (isset($_POST['add-supplier'])) {
+                    redirect(base_url('Csupplier/manage_supplier'));
+                    exit;
+                } elseif (isset($_POST['add-supplier-another'])) {
+                    redirect(base_url('Csupplier'));
+                    exit;
+                }
          
-        $this->db->insert('supplier_information',$data);
-
-
-            $supplier_id = $this->db->insert_id();
-          $coa = $this->Suppliers->headcode();
-        if($coa->HeadCode!=NULL){
-            $headcode=$coa->HeadCode+1;
         }
-        else{
-            $headcode="502000001";
-        }
-             $c_acc=$supplier_id.'-'.$this->input->post('supplier_name',TRUE);
-        $createby=$this->session->userdata('user_id');
-        $createdate=date('Y-m-d H:i:s');
-        $supplier_coa = [
-              'HeadCode'       => $headcode,
-            'HeadName'         => $c_acc,
-            'PHeadName'        => 'Account Payable',
-            'HeadLevel'        => '3',
-            'IsActive'         => '1',
-            'IsTransaction'    => '1',
-            'IsGL'             => '0',
-            'HeadType'         => 'L',
-            'IsBudget'         => '0',
-            'supplier_id'      => $supplier_id,
-            'IsDepreciation'   => '0',
-            'DepreciationRate' => '0',
-            'CreateBy'         => $createby,
-            'CreateDate'       => $createdate,
-        ];
-            //Previous balance adding -> Sending to supplier model to adjust the data.
-            $this->db->insert('acc_coa',$supplier_coa);
-            $this->Suppliers->previous_balance_add($this->input->post('previous_balance',TRUE), $supplier_id,$c_acc,$this->input->post('supplier_name',TRUE));
-            
-            $this->session->set_userdata(array('message' => display('successfully_added')));
-             if (isset($_POST['add-supplier-from-expense'])) {
-                redirect(base_url('Cpurchase'));
-                exit;
-            }
-            if (isset($_POST['add-supplier-from-oit'])) {
-                redirect(base_url('Ccpurchase/ocean_import_tracking'));
-                exit;
-            }
-            if (isset($_POST['add-supplier-from-trucking-sale'])) {
-                redirect(base_url('Cinvoice/trucking'));
-                exit;
-            }
-            if (isset($_POST['add-supplier'])) {
-                redirect(base_url('Csupplier/manage_supplier'));
-                exit;
-            } elseif (isset($_POST['add-supplier-another'])) {
-                redirect(base_url('Csupplier'));
-                exit;
-            }
-     
-    }
+
     //Manage supplier
     public function manage_supplier() {
         $CI =& get_instance();
@@ -154,7 +155,8 @@ class Csupplier extends CI_Controller {
             'state'         => $this->input->post('state',TRUE),
             'zip'           => $this->input->post('zip',TRUE),
             'country'       => $this->input->post('country',TRUE),
-            'details'       => $this->input->post('details',TRUE)
+            'details'       => $this->input->post('details',TRUE),
+            'currency_type'       => $this->input->post('currency_type',TRUE)
         );
          $supplier_coa = [
              'HeadName'         => $c_acc

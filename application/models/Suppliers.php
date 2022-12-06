@@ -256,8 +256,9 @@ class Suppliers extends CI_Model {
                   ->order_by('b.product_name','asc')
                   ->limit(15)
                   ->get();
+                //   echo $this->db->last_query();die();
           if ($query->num_rows() > 0) {
-              return $query->result_array();  
+              return $query->result_array();
           }
           return false;
       }

@@ -1,7 +1,3 @@
-
-
-
-
 <script src="<?php echo base_url() ?>assets/js/canvasjs.min.js" ></script>
 <script src="<?php echo base_url() ?>assets/js/dashboard.js" ></script>
 <link href="<?php echo base_url() ?>assets/css/xcharts.min.css" rel="stylesheet">

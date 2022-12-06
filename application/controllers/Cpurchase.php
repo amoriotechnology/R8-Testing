@@ -493,8 +493,6 @@ $CI = & get_instance();
 
     //Product search by supplier id
     public function product_search_by_supplier() {
-
-
         $CI = & get_instance();
         $this->auth->check_admin_auth();
         $CI->load->library('lpurchase');
@@ -506,7 +504,7 @@ $CI = & get_instance();
         $list[''] = '';
         foreach ($product_info as $value) {
             $json_product[] = array('label'=>$value['product_name'].'('.$value['product_model'].')','value'=>$value['product_id']);
-        } 
+        }
     }else{
         $json_product[] = 'No Product Found';
         }

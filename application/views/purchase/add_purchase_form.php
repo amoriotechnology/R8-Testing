@@ -876,12 +876,18 @@ textarea:focus, input:focus{
 
                         
 
-                      <div class="modal-body">
+                        <div class="modal-body">
+
                             <div id="customeMessage" class="alert hide"></div>
+
                       <?php echo form_open_multipart('Cproduct/insert_product_from_expense', array('class' => 'form-vertical', 'id' => 'insert_product_from_expense', 'name' => 'insert_product')) ?>
+
                     <div class="panel-body">
+
  <input type ="hidden" name="csrf_test_name" id="" value="<?php echo $this->security->get_csrf_hash();?>">
+
                       <div class="row">
+                           
                             <div class="col-sm-6">
                                 <div class="form-group row">
                                     <label for="quantity" class="col-sm-4 col-form-label"><?php echo 'Quantity' ?> <i class="text-danger">*</i></label>
@@ -891,6 +897,10 @@ textarea:focus, input:focus{
                                 </div>
                             </div>
                         </div>
+
+
+
+                       
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group row">
@@ -903,6 +913,7 @@ textarea:focus, input:focus{
                                             {/product_name}
                                             <input type="hidden"  id="productid" name="productid"/>
                                         </select>
+                                        
                     </div>
                 </div>
             </div>
@@ -914,7 +925,11 @@ textarea:focus, input:focus{
                                     </div>
                                 </div>
                             </div> -->
+
                         </div>
+
+
+
                        <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group row">
@@ -924,13 +939,17 @@ textarea:focus, input:focus{
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                        </div>  
+
+
+
                         <div class="row">
                              <div class="col-sm-6">
                                     <div class="form-group row">
                                     <label for="supplier" class="col-sm-4 col-form-label">Select Supplier<i class="text-danger"></i></label>
                                             <div class="col-sm-8">
-                                            <select name="supplier_id" id="supplier_id" class="form-control " required="" tabindex="1">
+                                            <select name="supplier_id" id="supplier_id" class="form-control " required="" tabindex="1"> 
                                             <option value=" "><?php echo display('select_one') ?></option>
                                             {all_supplier}
                                             <option value="{supplier_id}">{supplier_name}</option>
@@ -939,7 +958,10 @@ textarea:focus, input:focus{
                                               </div>
                                                 </div>
                             </div>
-                        </div>
+                        </div>    
+
+
+
                          <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group row">
@@ -947,9 +969,11 @@ textarea:focus, input:focus{
                                     <div class="col-sm-8">
                                         <input class="form-control text-right" id="sell_price" name="price" type="text" required="" placeholder="0.00" tabindex="5" min="0">
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                       </div>
+
+
                       <div class="row">
                               <div class="col-sm-5">
                                 <div class="form-group row">
@@ -966,7 +990,18 @@ textarea:focus, input:focus{
                                     </div>
                                 </div>
                             </div>
+
+
+
+                            
                       </div>
+
+
+                   
+
+
+
+
                 <div class="row">
                       <div class="col-sm-5">
                                 <div class="form-group row">
@@ -983,10 +1018,19 @@ textarea:focus, input:focus{
                                     </div>
                                 </div>
                             </div>
+
+
                            <!--   <div class=" col-sm-1">
+
                                          <a href="#" class="client-add-btn btn btn-info" aria-hidden="true" data-toggle="modal" data-target="#add_cat"><i class="ti-plus m-r-2"></i></a>
+
                              </div> -->
+
                         </div>
+
+
+
+
                        <div class="row">
                            <!--  <div class="col-sm-6">
                                 <div class="form-group row">
@@ -994,9 +1038,11 @@ textarea:focus, input:focus{
                                     <div class="col-sm-8">
                                         <input type="file" name="image" class="form-control" id="image" tabindex="4">
                                     </div>
-                                </div>
+                                </div> 
                             </div> -->
-                        </div>
+                    
+                        </div> 
+                        
                    <div class="row">
                             <div class="col-sm-12">
                                 <center><label for="description" class="col-form-label"><?php echo display('product_details') ?></label></center>
@@ -1005,21 +1051,41 @@ textarea:focus, input:focus{
                         </div><br>
                         <div class="form-group row">
                             <div class="col-sm-6">
+
                                 <input type="submit" id="add-product" class="btn btn-primary btn-large" name="insert_product_from_expense" value="<?php echo display('save') ?>" tabindex="10"/>
                                 <input type="submit" value="<?php echo display('save_and_add_another') ?>" name="insert_product_from_expense" class="btn btn-large btn-success" id="add-product-another" tabindex="9">
                             </div>
                         </div>
+
                     </div>
+
+                    
+
                         </div>
+
+
+
                         <div class="modal-footer">
+
+                            
+
                             <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
+
+                            
                             <input type="submit" id="add-deposit" class="btn btn-success" name="add-deposit" value="<?php echo display('save') ?>" tabindex="6"/>
                            <!--  <input type="submit" class="btn btn-success" value="Submit"> -->
+
                         </div>
+
                         <?php echo form_close() ?>
+
                     </div><!-- /.modal-content -->
+
                 </div><!-- /.modal-dialog -->
+
             </div><!-- /.modal -->
+
+
 
 
 
@@ -1131,7 +1197,10 @@ function(data) {
 
 });
 
-  
+$('#productname').on('change', function() {
+    var val=$('#productname').val();
+  $('#productid').val(val);
+});
   
   
   
@@ -1284,11 +1353,3 @@ $('.remove-preview').on('click', function() {
         });
     </script>
     <?php } ?>
-    
-    
-    <script>
-$('#productname').on('change', function() {
-    var val=$('#productname').val();
-  $('#productid').val(val);
-});
-    </script>

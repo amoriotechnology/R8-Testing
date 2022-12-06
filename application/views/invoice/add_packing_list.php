@@ -19,7 +19,8 @@
             <small>Generate New Packing List Invoice</small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#">Packing List</a></lia                <li class="active">Packing List Invoice</li>
+                <li><a href="#">Packing List</a></li> 
+                <li class="active">Packing List Invoice</li>
             </ol>
         </div>
     </section>
@@ -131,14 +132,14 @@
 
         <br>
 
- <input type='button' value='Add Bundle' id="buddle_1"    class="btn btn-primary" onclick="add(); " style="float: right;margin-left: 10px;    margin-right: 33px;
-    margin-top: 12px;margin-bottom: 20px;"  />
-<div id='content'>
-            <div class="crate_wrap" id="crate_wrap" style="
-    border: 1px solid #ddd;
-    padding: 6px;
-    margin: 5px;
-">
+                 <input type='button' value='Add Bundle' id="buddle_1"    class="btn btn-primary" onclick="add(); " style="float: right;margin-left: 10px;    margin-right: 33px;
+                    margin-top: 12px;margin-bottom: 20px;"  />
+                <div id='content'>
+                            <div class="crate_wrap" id="crate_wrap" style="
+                    border: 1px solid #ddd;
+                    padding: 6px;
+                    margin: 5px;
+                ">
 
 
 

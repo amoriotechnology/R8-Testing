@@ -26,119 +26,95 @@ class Cproduct extends CI_Controller {
     }
 
     //Insert Product and uload
+    public function insert_product_from_expense(){
+        $CI = & get_instance();
+               $CI->auth->check_admin_auth();
+               $CI->load->library('lproduct');
+               $product_id = (!empty($this->input->post('product_id',TRUE))?$this->input->post('product_id',TRUE):$this->generator(8));
+               $quantity = (!empty($this->input->post('quantity',TRUE))?$this->input->post('quantity',TRUE):1);
+               if($quantity<1){
+                   $quantity=1;
+               }
+               $check_product = $this->db->select('*')->from('product_information')->where('product_id',$product_id)->get()->num_rows();
+               if($check_product > 0){
+                   $this->session->set_userdata(array('error_message' => display('already_exists')));
+                       redirect(base_url('Cproduct'));
+               }
+               $sup_price = $this->input->post('supplier_price',TRUE);
+               $s_id = $this->input->post('product_id',TRUE);
+               $product_model = $this->input->post('model',TRUE);
+               $date=date('d-m-Y');
+               $product_id= $this->input->post('productid',TRUE);
+               $supplier_id= $this->input->post('supplier_id',TRUE);
+               $supplier_price= $this->input->post('price',TRUE);
+               $products_model= $this->input->post('model',TRUE);
+       ;
+                   $supp_prd = array(
+                       'created_by'       =>  $this->session->userdata('user_id'),
+                       'product_id'     => $product_id,
+                       'supplier_id'    => $supplier_id,
+                       'supplier_price' => $supplier_price,
+                       'products_model' => $product_model
+                   );
+                   $this->db->insert('supplier_product', $supp_prd);
+               //Supplier check
+              if ($this->input->post('supplier_id',TRUE) == null) {
+                  $this->session->set_userdata(array('error_message' => display('please_select_supplier')));
+                  redirect(base_url('Cproduct'));
+               }
+               $price = $this->input->post('price',TRUE);
+               $tax_percentage = $this->input->post('tax',TRUE);
+               $tax = $tax_percentage / 100;
+               $tablecolumn = $this->db->list_fields('tax_collection');
+               $num_column = count($tablecolumn)-4;
+               if($num_column > 0){
+              $taxfield = [];
+              for($i=0;$i<$num_column;$i++){
+               $taxfield[$i] = 'tax'.$i;
+              }
+              foreach ($taxfield as $key => $value) {
+               $dataa[$value] = $this->input->post($value)/100;
+              }
+           }
+               $serial_no=substr(time(),-7,-1);
+               if($this->input->post('serial_no',TRUE)){
+               $serial_no=$this->input->post('serial_no',TRUE);
+           }
+                   $data['product_id']   = $product_id;
+                   $data['created_by']   = $this->session->userdata('user_id');
+                   $data['product_name'] = $this->input->post('productname',TRUE);
+                   $data['category_id']  = $this->input->post('category_id',TRUE);
+                   $data['unit']         = $this->input->post('unit',TRUE);
+                   $data['tax']          = 0;
+                   $data['p_quantity']   = $quantity;
+                   $data['serial_no']    = $serial_no;
+                   $data['price']        = $price;
+                   $data['product_model']= $this->input->post('model',TRUE);
+                   $data['product_details'] = $this->input->post('description',TRUE);
+                   $data['image']        = (!empty($image_url) ? $image_url : base_url('my-assets/image/product.png'));
+                   $data['status']       = 1;
+             //print_r($data);dd();
+               $result = $CI->lproduct->insert_product($data);
+               if ($result == 1) {
+                   $this->session->set_userdata(array('message' => display('successfully_added')));
+                   if (isset($_POST['insert_product_from_expense'])) {
+                       redirect(base_url('Cpurchase'));
+                       exit;
+                   }
+                   if (isset($_POST['add-product'])) {
+                       redirect(base_url('Cproduct/manage_product'));
+                       exit;
+                   } elseif (isset($_POST['add-product-another'])) {
+                       redirect(base_url('Cproduct'));
+                       exit;
+                   }
+               } else {
+                   $this->session->set_userdata(array('error_message' => display('product_model_already_exist')));
+                   redirect(base_url('Cproduct'));
+               }
+           }
 
 
-   public function insert_product_from_expense(){
- $CI = & get_instance();
-        $CI->auth->check_admin_auth();
-        $CI->load->library('lproduct');
-        $product_id = (!empty($this->input->post('product_id',TRUE))?$this->input->post('product_id',TRUE):$this->generator(8));
-        $quantity = (!empty($this->input->post('quantity',TRUE))?$this->input->post('quantity',TRUE):1);
-        if($quantity<1){
-            $quantity=1;
-        }
-        $check_product = $this->db->select('*')->from('product_information')->where('product_id',$product_id)->get()->num_rows();
-        if($check_product > 0){
-            $this->session->set_userdata(array('error_message' => display('already_exists')));
-                redirect(base_url('Cproduct'));
-        }
-        $sup_price = $this->input->post('supplier_price',TRUE);
-        $s_id = $this->input->post('product_id',TRUE);
-        $product_model = $this->input->post('model',TRUE);
-        $date=date('d-m-Y');
-        $product_id= $this->input->post('productid',TRUE);
-        $supplier_id= $this->input->post('supplier_id',TRUE);
-        $supplier_price= $this->input->post('price',TRUE);
-        $products_model= $this->input->post('model',TRUE);
-;
-            $supp_prd = array(
-                'created_by'       =>  $this->session->userdata('user_id'),
-                'product_id'     => $product_id,
-                'supplier_id'    => $supplier_id,
-                'supplier_price' => $supplier_price,
-                'products_model' => $product_model
-            );
-            $this->db->insert('supplier_product', $supp_prd);
-        //Supplier check
-       if ($this->input->post('supplier_id',TRUE) == null) {
-           $this->session->set_userdata(array('error_message' => display('please_select_supplier')));
-           redirect(base_url('Cproduct'));
-        }
-       // if ($_FILES['image']['name']) {
-            //Chapter chapter add start
-          //  $config['upload_path']   = './my-assets/image/product/';
-          //  $config['allowed_types'] = 'gif|jpg|png|jpeg|JPEG|GIF|JPG|PNG';
-          // $config['encrypt_name']  = TRUE;
-            //$this->load->library('upload', $config);
-            //if (!$this->upload->do_upload('image')) {
-               // $error = array('error' => $this->upload->display_errors());
-                //$this->session->set_userdata(array('error_message' => $this->upload->display_errors()));
-                //redirect(base_url('Cproduct'));
-           // } else {
-            //$imgdata = $this->upload->data();
-            //$image = $config['upload_path'].$imgdata['file_name'];
-           /// $config['image_library']  = 'gd2';
-           // $config['source_image']   = $image;
-            //$config['create_thumb']   = false;
-            //$config['maintain_ratio'] = TRUE;
-            //$config['width']          = 100;
-           //$config['height']         = 100;
-            //$this->load->library('image_lib', $config);
-            //$this->image_lib->resize();
-           // $image_url = base_url() . $image;
-           // }
-       // }
-        $price = $this->input->post('price',TRUE);
-        $tax_percentage = $this->input->post('tax',TRUE);
-        $tax = $tax_percentage / 100;
-        $tablecolumn = $this->db->list_fields('tax_collection');
-        $num_column = count($tablecolumn)-4;
-        if($num_column > 0){
-       $taxfield = [];
-       for($i=0;$i<$num_column;$i++){
-        $taxfield[$i] = 'tax'.$i;
-       }
-       foreach ($taxfield as $key => $value) {
-        $dataa[$value] = $this->input->post($value)/100;
-       }
-    }
-        $serial_no=substr(time(),-7,-1);
-        if($this->input->post('serial_no',TRUE)){
-        $serial_no=$this->input->post('serial_no',TRUE);
-    }
-            $data['product_id']   = $product_id;
-            $data['created_by']   = $this->session->userdata('user_id');
-            $data['product_name'] = $this->input->post('productname',TRUE);
-            $data['category_id']  = $this->input->post('category_id',TRUE);
-            $data['unit']         = $this->input->post('unit',TRUE);
-            $data['tax']          = 0;
-            $data['p_quantity']   = $quantity;
-            $data['serial_no']    = $serial_no;
-            $data['price']        = $price;
-            $data['product_model']= $this->input->post('model',TRUE);
-            $data['product_details'] = $this->input->post('description',TRUE);
-            $data['image']        = (!empty($image_url) ? $image_url : base_url('my-assets/image/product.png'));
-            $data['status']       = 1;
-      //print_r($data);dd();
-        $result = $CI->lproduct->insert_product($data);
-        if ($result == 1) {
-            $this->session->set_userdata(array('message' => display('successfully_added')));
-            if (isset($_POST['insert_product_from_expense'])) {
-                redirect(base_url('Cpurchase'));
-                exit;
-            }
-            if (isset($_POST['add-product'])) {
-                redirect(base_url('Cproduct/manage_product'));
-                exit;
-            } elseif (isset($_POST['add-product-another'])) {
-                redirect(base_url('Cproduct'));
-                exit;
-            }
-        } else {
-            $this->session->set_userdata(array('error_message' => display('product_model_already_exist')));
-            redirect(base_url('Cproduct'));
-        }
-    }
     public function insert_product() {
         $CI = & get_instance();
         $CI->auth->check_admin_auth();

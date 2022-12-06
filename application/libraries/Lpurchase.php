@@ -72,69 +72,42 @@ class Lpurchase {
 
     }
     public function purchase_add_form1() {
-
         $CI = & get_instance();
         $CI1 = & get_instance();
         $CI1->load->model('Purchases');
-            $CI->load->model('Suppliers');
+        $CI->load->model('Suppliers');
         $CI->load->model('Categories');
         $CI->load->model('Units');
         $CI->load->model('Products');
-   
-
-
-
+        $CI->load->model('Invoices');
         $CI->load->model('Web_settings');
-
         $all_product_list = $CI1->Products->all_product_list();
         $all_supplier = $CI1->Purchases->select_all_supplier();
         $expense_packing_list        = $CI1->Purchases->expense_package();
            $supplier      = $CI->Suppliers->supplier_list("110", "0");
-
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-
         $bank_list        = $CI->Web_settings->bank_list();
-
-
         $category_list = $CI->Categories->category_list_product();
-
         $unit_list     = $CI->Units->unit_list();
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
         $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
-      
-
+     $product_name=$CI->Invoices->allproduct();
         $data = array(
             'curn_info_default' =>$curn_info_default[0]['currency_name'],
             'currency' => $currency_details[0]['currency'],
             'title'         => display('add_purchase'),
-
             'all_supplier'  => $all_supplier,
             'product_list'  => $all_product_list,
-
-           
-
+           'product_name' =>$product_name,
             'invoice_no'    => $CI->auth->generator(10),
-
             'category_list'=> $category_list,
-
             'unit_list'    => $unit_list,
-
             'discount_type' => $currency_details[0]['discount_type'],
-
             'bank_list'     => $bank_list,
             'packinglist'=>$expense_packing_list,
-
         );
-
-      
-        // print_r($all_supplier); 
-        // exit();
-    
         $purchaseForm = $CI->parser->parse('purchase/add_purchase_form', $data, true);
-       
-      
         return $purchaseForm;
-
     }
 
       public function packing_add_form() {

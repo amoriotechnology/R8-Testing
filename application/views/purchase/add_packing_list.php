@@ -18,7 +18,7 @@
             <h1>Packing List</h1>
             <small>Generate New Packing List Invoice</small>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?><?php echo $_SESSION['expense_packing_id']; ?></a></li>
+            <li><a href="<?php   echo base_url(); ?>"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#">Packing List</a></li>
                 <li class="active">Packing List Invoice</li>
             </ol>
@@ -399,7 +399,7 @@
 
 
 
-<?php 
+<!-- <?php 
 
     if($_SESSION['expense_packing_id'])
         { ?>
@@ -412,7 +412,7 @@
            hide();
         });
     </script>
-    <?php } ?>
+    <?php } ?> -->
 
 <script type="text/javascript">
 
