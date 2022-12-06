@@ -114,8 +114,7 @@
 
                     <div class="panel-body">
 
-                    <?php echo form_open_multipart('Cpurchase/purchase_order_update',array('class' => 'form-vertical', 'id' => 'purchase_order_update'))?>
-
+                    <form id="insert_purchase"  method="post">      
                         
 
 
@@ -267,7 +266,7 @@
                                 </div>
                             </div>
 
-
+                            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 
 
                            <!--  <div class="col-sm-6">
@@ -412,22 +411,48 @@
 
                         </div>
 
-
-
-                        <div class="form-group row">
-
-                            <div class="col-sm-6">
-
-                                <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-purchase" value="<?php echo display('submit') ?>" />
-
-                                <input type="submit" value="<?php echo display('submit_and_add_another') ?>" name="add-purchase-another" class="btn btn-large btn-success" id="add_purchase_another" >
-
+                        <div class="row">
+                        <div class="col-sm-6">
+                               <div class="form-group row">
+                                    <label for="adress" class="col-sm-4 col-form-label">Message / Notes on Invoice
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" rows="4" cols="50" id="adress" name="message_invoice" placeholder="Message on Invoice" rows="1"></textarea>
+                                    </div>
+                                </div> 
                             </div>
 
+
+                             <div class="col-sm-6">
+                               <div class="form-group row">
+                                    <label for="adress" class="col-sm-4 col-form-label">Attachements
+                                    </label>
+                                    <div class="col-sm-8">
+                                       <input type="file" name="attachments" class="form-control">
+                                    </div>
+                                </div> 
+                            </div>
                         </div>
 
-                    <?php echo form_close()?>
 
+
+
+                         <div class="form-group row">
+                            <div class="col-sm-6">
+                                <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-purchase-order" value="Save" />
+                            
+                                  
+                                <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+
+<a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
+                               
+
+                            </div>
+                            </div>
+                        </div>
+
+                     
+        </form> <input type="hidden" id="invoice_hdn"/> <input type="hidden" id="invoice_hdn1"/>
                     </div>
 
                 </div>
@@ -439,7 +464,231 @@
     </section>
 
 </div>
+<div class="modal fade" id="myModal1" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expense - Purchase Order</h4>
+        </div>
+        <div class="modal-body" style="text-align:center;font-weight:bold;">
+          
+          <h4>Purchase order Updated Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
+  <div class="modal fade" id="myModal1" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expense - Purchase Order</h4>
+        </div>
+        <div class="modal-body" id="bodyModal1" style="font-weight:bold;text-align:center;">
+          
+        
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+           
+ 
+
+          
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+   
+var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
+var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
+var count = 2;
+var limits = 500;
+function addPurchaseOrderField2(divName){
+
+    if (count == limits)  {
+        alert("You have reached the limit of adding " + count + " inputs");
+    }
+    else{
+        var newdiv = document.createElement('tr');
+        var tabin="product_name_"+count;
+         tabindex = count * 4 ,
+       newdiv = document.createElement("tr");
+        tab1 = tabindex + 1;
+        
+        tab2 = tabindex + 2;
+        tab3 = tabindex + 3;
+        tab4 = tabindex + 4;
+        tab5 = tabindex + 5;
+        tab6 = tab5 + 1;
+        tab7 = tab6 +1;
+       
+
+
+        newdiv.innerHTML ='<td class="span3 supplier"><input type="text" name="product_name" required="" class="form-control product_name productSelection" onkeypress="product_pur_or_list('+ count +');" placeholder="Product Name" id="product_name_'+ count +'" tabindex="'+tab1+'" > <input type="hidden" class="autocomplete_hidden_value product_id_'+ count +'" name="product_id[]" id="SchoolHiddenId"/>  <input type="hidden" class="sl" value="'+ count +'">  </td>  <td class="wt"> <input type="text" class="form-control text-right" name="slabs[]" placeholder="0.00" /> </td>  <td class="wt"> <input type="text" id="available_quantity_'+ count +'" class="form-control text-right stock_ctn_'+ count +'"/> </td><td class="text-right"><input type="text" name="product_quantity[]" tabindex="'+tab2+'" required  id="cartoon_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="0.00" value="" min="0"/>  </td> <td style="width:220px"><span class="form-control" style="background-color: #eee;"><?php  echo $currency." ";  ?> <input type="text" name="product_rate[]" onkeyup="calculate_store('+ count +');" onchange="calculate_store('+ count +');" id="product_rate_'+ count +'" class="product_rate_'+ count +'" placeholder="0.00" value="" min="0" tabindex="'+tab3+'"/></span></td> <td><span class="form-control" style="background-color: #eee;"><?php  echo $currency." ";  ?> <input class="total_price total_price_'+ count +'" type="text" name="total_price[]" id="total_price_'+ count +'" value="0.00" readonly="readonly" /> </span></td><td> <input type="hidden" id="total_discount_1" class="" /><input type="hidden" id="all_discount_1" class="total_discount" /><button style="text-align: right;" class="btn btn-danger red" type="button"  onclick="deleteRow(this)" tabindex="8"><i class="fa fa-close"></i></button></td>';
+        document.getElementById(divName).appendChild(newdiv);
+        document.getElementById(tabin).focus();
+        document.getElementById("add_invoice_item").setAttribute("tabindex", tab5);
+        document.getElementById("add_purchase").setAttribute("tabindex", tab6);
+   
+       
+        count++;
+
+        $("select.form-control:not(.dont-select-me)").select2({
+            placeholder: "Select option",
+            allowClear: true
+        });
+    }
+}
+$( document ).ready(function() {
+    $('#final_submit').hide();
+$('#download').hide();
+                      
+});
+$('#supplier_id').on('change', function (e) {
+  
+  var data = {
+      value: $('#supplier_id').val()
+   };
+  data[csrfName] = csrfHash;
+  $.ajax({
+      type:'POST',
+      data: data,
+   
+      //dataType tells jQuery to expect JSON response
+      dataType:"json",
+      url:'<?php echo base_url();?>Cinvoice/getvendor',
+      success: function(result, statut) {
+          if(result.csrfName){
+             //assign the new csrfName/Hash
+             csrfName = result.csrfName;
+             csrfHash = result.csrfHash;
+          }
+         // var parsedData = JSON.parse(result);
+        //  alert(result[0].p_quantity);
+        console.log(result[0]['currency_type']);
+     // $("#vendor_gtotal").val(result[0]['currency_type']);
+      $("#cus").val(result[0]['currency_type']);
+        $("label[for='custocurrency']").html(result[0]['currency_type']);
+       console.log('https://open.er-api.com/v6/latest/<?php echo $curn_info_default; ?>');
+       $.getJSON('https://open.er-api.com/v6/latest/<?php echo $curn_info_default; ?>', 
+function(data) {
+ var custo_currency=result[0]['currency_type'];
+    var x=data['rates'][custo_currency];
+ var Rate =parseFloat(x).toFixed(3);
+  console.log(Rate);
+  $('.hiden').show();
+  $("#custocurrency_rate").val(Rate);
+});
+      }
+  });
+
+
+});
+$('#insert_purchase').submit(function (event) {
+    var dataString = {
+        dataString : $("#insert_purchase").serialize()
+    
+   };
+   dataString[csrfName] = csrfHash;
+  
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"<?php echo base_url(); ?>Cpurchase/insert_purchase_order",
+        data:$("#insert_purchase").serialize(),
+
+        success:function (data) {
+        console.log(data);
+   
+            var split = data.split("/");
+            $('#invoice_hdn1').val(split[0]);
+         
+     
+            $('#invoice_hdn').val(split[1]);
+            $("#myModal1").find('.modal-body').text('Purchase Order Updated Successfully');
+            $('#final_submit').show();
+$('#download').show();
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+$("#bodyModal1").html("");
+ },2500);
+
+
+       }
+
+    });
+    event.preventDefault();
+});
+$('#download').on('click', function (e) {
+
+ var popout = window.open("<?php  echo base_url(); ?>Cpurchase/purchase_order_details_data/"+$('#invoice_hdn1').val());
+ 
+    window.setTimeout(function(){
+         popout.close();
+        
+      }, 1500);
+      e.preventDefault();
+
+});  
+
+$('#final_submit').on('click', function (e) {
+
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No : "+$('#invoice_hdn').val()+" has been Updated Successfully";
+  
+    console.log(input_hdn);
+    $("#myModal1").find('.modal-body').text(input_hdn);
+   // $("#bodyModal1").html(input_hdn);
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+ },2500);
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_purchase_order";
+      }, 2500);
+       
+});
+
+window.onbeforeunload = function(){
+    if(!window.btn_clicked){
+        return 'Your Invoice is not submitted. Would you like to submit or discard';
+    }
+};
+  
+  
+
+    </script>
+
+
+
+
+         
 
 
 

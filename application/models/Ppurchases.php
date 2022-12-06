@@ -2025,11 +2025,11 @@ class Ppurchases extends CI_Model {
         $this->db->where('a.trucking_id', $purchase_id);
         //$this->db->group_by('d.product_id');
         $query = $this->db->get();
-       
+    
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
-        return false;
+      
     }
 
     //This function will check the product & supplier relationship.

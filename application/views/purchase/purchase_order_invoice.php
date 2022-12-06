@@ -329,133 +329,211 @@ for($i=0;$i<sizeof($order);$i++){ ?>
 </section>
 </div>
 <!-- Purchase ledger End  -->
+<div class="modal fade" id="myModal1" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-top: 100px;">
+        <div class="modal-header" style="">
+      
+          <h4 class="modal-title">Expenses - Purchase Order</h4>
+        </div>
+        <div class="content">
 
+        <div class="modal-body">
+          
+          <h4>Purchase Order Downloaded Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+        </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+       
+        <style>
+.modal-header {
+    text-align-last: center;
 
-<style>
-
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    background-color: #1c2350;
+    color: #fff;
+}
 .key{
-text-align:left;
+    text-align:left;
 font-weight:bold;
 
 }
 .value{
-text-align:left;
+    text-align:left;
 }
 #one,#two{
 float:left;
 width:100%;
 }
 body{
-background-color: #fcf8f8; 
-margin: 0;
-padding: 0;
+    background-color: #fcf8f8; 
+    margin: 0;
+    padding: 0;
 }
 h1,h2,h3,h4,h5,h6{
-margin: 0;
-padding: 0;
+    margin: 0;
+    padding: 0;
 }
 p{
-margin: 0;
-padding: 0;
+    margin: 0;
+    padding: 0;
 }
 .heading_name{
-font-weight: bold;
+    font-weight: bold;
 }
 .container{
-width: 100%;
-margin-right: auto;
-margin-left: auto;
-margin-top: 50px;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 50px;
 }
 .brand-section{
-background-color: #5961b3;
-padding: 10px 40px;
+   background-color: #5961b3;
+   padding: 10px 40px;
 }
 .logo{
-width: 50%;
+    width: 50%;
 }
 
 .row{
-display: flex;
-flex-wrap: wrap;
-
+    display: flex;
+    flex-wrap: wrap;
+    
 }
 .col-6{
-width: 50%;
-flex: 0 0 auto;
-
+    width: 50%;
+    flex: 0 0 auto;
+   
 }
 .text-white{
-color: #fff;
+    color: #fff;
 }
 .company-details{
-float: right;
-text-align: right;
+    float: right;
+    text-align: right;
 }
 
 .body-section{
-padding: 16px;
-border: 1px solid gray;
-
+    padding: 16px;
+    border: 1px solid gray;
+    
 }
 .heading{
-font-size: 20px;
-margin-bottom: 08px;
+    font-size: 20px;
+    margin-bottom: 08px;
 }
 .sub-heading{
-color: #262626;
-margin-bottom: 05px;
+    color: #262626;
+    margin-bottom: 05px;
 }
 table{
-
-background-color: #fff;
-width: 100%;
-border-collapse: collapse;
-
+   
+    background-color: #fff;
+    width: 100%;
+    border-collapse: collapse;
+   
 }
 
 table thead tr{
-border: 1px solid #111;
-background-color: #5961b3;
-
+    border: 1px solid #111;
+    background-color: #5961b3;
+   
 }
 .table-bordered td{
-text-align:center;
+    text-align:center;
 }
 table td {
-vertical-align: middle !important;
-
-word-wrap: break-word;
+    vertical-align: middle !important;
+  
+    word-wrap: break-word;
 }
 th{
-text-align:center;
-color:white;
+    text-align:center;
+    color:white;
 }
 table th, table td {
-padding-top: 08px;
-padding-bottom: 08px;
+    padding-top: 08px;
+    padding-bottom: 08px;
 }
 .table-bordered{
-box-shadow: 0px 0px 5px 0.5px gray !important;
+    box-shadow: 0px 0px 5px 0.5px gray !important;
 }
 .table-bordered td, .table-bordered th {
-border: 1px solid #dee2e6 !important;
+    border: 1px solid #dee2e6 !important;
 }
 .text-right{
-text-align: right;
+    text-align: right;
 }
 .w-20{
-width: 20%;
+    width: 20%;
 }
 .float-right{
-float: right;
+    float: right;
 }
 @media only screen and (max-width: 600px) {
-
+    
 }
 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
 
-</style>
+.modal .content {
+  position: relative;
+  padding: 10px;
+ 
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: rgba(112, 128, 175, 0.2) 0px 16px 24px 0px;
+  transform: scale(0);
+  transition: transform 300ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+}
+
+.modal .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #7080af;
+  clip-path: polygon(0 10%, 10% 0, 50% 40%, 89% 0, 100% 10%, 60% 50%, 100% 90%, 90% 100%, 50% 60%, 10% 100%, 0 89%, 40% 50%);
+}
+
+.modal.open {
+    background-color:#38469f;
+  opacity: 1;
+  visibility: visible;
+}
+.modal.open .content {
+  transform: scale(1);
+}
+.content-wrapper.blur {
+  filter: blur(5px);
+}
+.content{
+    min-height:0px;
+}
+</style> 
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -500,10 +578,21 @@ pdf.setTextColor(150);
 
 }
 }).save();
-var timer = setTimeout(function() {
-window.location="<?php echo base_url('Cpurchase/manage_purchase_order') ?>"
-}, 1500);
+});
+window.setTimeout(function(){
+   
+   window.location ="<?php  echo base_url(); ?>Cpurchase/manage_purchase_order";
 
+	 }, 2000);
+  
+  $( '.modal' ).addClass( 'open' );
+
+if ( $( '.modal' ).hasClass( 'open' ) ) {
+ $( '.container' ).addClass( 'blur' );
+} 
+$( '.close' ).click(function() {
+ $( '.modal' ).removeClass( 'open' );
+ $( '.cont' ).removeClass( 'blur' );
 });
 
 </script> 

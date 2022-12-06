@@ -61,7 +61,9 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
 
       <div class="container">
 <?php
-
+  $myArray = explode('(',$tax); 
+  $tax_amt=$myArray[0];
+  $tax_des=$myArray[1];
 
       //////////////Design one/////////////  
             if($template==1)
@@ -141,7 +143,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
               
                     <tr>
                     <td style="font-size: 15px;"><?php echo $count; ?></td>
-                        <td style="font-size: 15px;"><?php  echo $purchase_all_data[$i]['invoice_date']; ?></td>
+                        <td style="font-size: 15px;"><?php  echo $purchase_all_data[$i]['trucking_date']; ?></td>
                          <td style="font-size: 15px;"><?php echo $purchase_all_data[$i]['qty']; ?></td>
 
                          <td style="font-size: 15px;"><?php echo $purchase_all_data[$i]['description']; ?></td>
@@ -164,7 +166,12 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                         <td colspan="5" style="text-align:right;font-weight:bold;">Total:</td>
                         <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $total_amt;  ?></td>
                     </tr>
-                  
+                    <tr>
+                       
+                       <td colspan="5" style="text-align:right;font-weight:bold;"><?php echo  "Tax (".$tax_des;  ?></td>
+                              <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $tax_amt;  ?></td>
+                          </tr>
+                       <tr>
                     <tr>
                         <td colspan="5" style="text-align:right;font-weight:bold;">Grand Total:</td>
                         <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $grandtotal;  ?></td>
@@ -252,7 +259,7 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                         
                          <td style="font-size: 15px;"><?php echo $count; ?></td>
 
-                         <td style="font-size: 15px;"><?php  echo $purchase_all_data[$i]['invoice_date']; ?></td>
+                         <td style="font-size: 15px;"><?php  echo $purchase_all_data[$i]['trucking_date']; ?></td>
                          <td style="font-size: 15px;"><?php echo $purchase_all_data[$i]['qty']; ?></td>
                          <td style="font-size: 15px;"><?php echo $purchase_all_data[$i]['description']; ?></td>
                          <td style="font-size: 15px;"><?php  echo $currency." " ; ?><?php echo $purchase_all_data[$i]['rate']; ?></td>
@@ -269,7 +276,12 @@ $Web_settings = $CI->Web_settings->retrieve_setting_editdata();
                         <td colspan="5" style="text-align:right;font-weight:bold;">Total:</td>
                         <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $total_amt;  ?></td>
                     </tr>
-                  
+                    <tr>
+                       
+                    <td colspan="5" style="text-align:right;font-weight:bold;"><?php echo  "Tax (".$tax_des;  ?></td>
+                           <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $tax_amt;  ?></td>
+                       </tr>
+                    <tr>
                     <tr>
                         <td colspan="5" style="text-align:right;font-weight:bold;">Grand Total:</td>
                         <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $grandtotal;  ?></td>
@@ -367,7 +379,7 @@ elseif($template==3)
                         
                    <td style="font-size: 15px;"><?php echo $count; ?></td>
 
-                       <td style="font-size: 15px;"><?php  echo $purchase_all_data[$i]['invoice_date']; ?></td>
+                       <td style="font-size: 15px;"><?php  echo $purchase_all_data[$i]['trucking_date']; ?></td>
                         <td style="font-size: 15px;"><?php echo $purchase_all_data[$i]['qty']; ?></td>
                         <td style="font-size: 15px;"><?php echo $purchase_all_data[$i]['description']; ?></td>
                         <td style="font-size: 15px;"><?php  echo $currency." " ; ?><?php echo $purchase_all_data[$i]['rate']; ?></td>
@@ -385,7 +397,12 @@ elseif($template==3)
                        <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $total_amt;  ?></td>
                    </tr>
                  
-
+                   <tr>
+                       
+                       <td colspan="5" style="text-align:right;font-weight:bold;"><?php echo  "Tax (".$tax_des;  ?></td>
+                              <td style="font-size: 16px;"><?php  echo $currency." " ; ?><?php echo $tax_amt;  ?></td>
+                          </tr>
+                       <tr>
 
 
                    <tr>

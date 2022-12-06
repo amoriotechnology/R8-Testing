@@ -4,7 +4,7 @@
         "use strict";
     function addpackingList(divName){
 
-        debugger;
+       
   
         if (count == limits)  {
             alert("You have reached the limit of adding " + count + " inputs");
@@ -24,7 +24,7 @@
             tab7 = tab6 +1;
            
 
-            newdiv.innerHTML ='<td class="span3 supplier"><input type="text" class="sl form-control text-right" value="'+ count +'">  </td>  <td class="wt"> <input type="text" name="slab_no[]" id="" class="form-control text-right" placeholder="0.00"/></td><td class="text-right" style="display: flex;"><input type="text" name="width[]" tabindex="'+tab2+'" required  id="cartoon_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="Width" style="width: 50%;" /><input type="text" name="height[]" id="product_rate_' + count + '" tabindex="'+tab2+'" required  id="cartoon_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="Height" style="width: 50%;" /> </td><td class="text-right"><input class="form-control total_price text-right total_price_'+ count +'" type="text" name="total_price[]" id="total_price_'+ count +'" value="0.00" readonly="readonly" /> </td><td> <input type="hidden" id="total_discount_1" class="" /><input type="hidden" id="all_discount_1" class="total_discount" /><button style="text-align: right;" class="btn btn-danger red" type="button"  onclick="deleteRow(this)" tabindex="8"><i class="fa fa-close"></i></button></td>';
+            newdiv.innerHTML ='<td class="span3 supplier"><input type="text" id="serial_number[]" name="serial_number[]" class="sl form-control text-right" value="'+ count +'">  </td>  <td class="wt"> <input type="text" name="slab_no[]" id="" class="form-control text-right" placeholder="0.00"/></td><td class="text-right" style="display: flex;"><input type="text" name="width[]" tabindex="'+tab2+'" required  id="cartoon_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="Width" style="width: 50%;" /><input type="text" name="height[]" id="product_rate_' + count + '" tabindex="'+tab2+'" required  id="cartoon_'+ count +'" class="form-control text-right store_cal_' + count + '" onkeyup="calculate_store(' + count + ');" onchange="calculate_store(' + count + ');" placeholder="Height" style="width: 50%;" /> </td><td class="text-right"><input class="form-control total_price text-right total_price_'+ count +'" type="text" name="total_price[]" id="total_price_'+ count +'" value="0.00" readonly="readonly" /> </td><td> <input type="hidden" id="total_discount_1" class="" /><input type="hidden" id="all_discount_1" class="total_discount" /><button style="text-align: right;" class="btn btn-danger red" type="button"  onclick="deleteRow(this)" tabindex="8"><i class="fa fa-close"></i></button></td>';
             document.getElementById(divName).appendChild(newdiv);
             // document.getElementById(tabin).focus();
             document.getElementById("add_invoice_item").setAttribute("tabindex", tab5);

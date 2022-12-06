@@ -80,10 +80,17 @@ class Cservice extends CI_Controller {
 
 
     public function help_desk_show() {
-
+        $CI = & get_instance();
         $content = $this->lservice->help_list();
+        $CI->load->model('Service');
 
-        $this->load->view('help_desk/show',$content);
+        $service_list = $CI->Service->content_list();
+        $data=array(
+            'service_list' => $service_list,
+
+        );
+
+        $this->load->view('help_desk/show',$data);
 
         
 

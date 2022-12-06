@@ -62,8 +62,7 @@
                     </div>
 
                     <div class="panel-body">
-                    <?php echo form_open_multipart('Cpurchase/insert_packing_list',array('class' => 'form-vertical', 'id' => 'insert_packing_list','name' => 'insert_packing_list'))?>
-                        
+                    <form id="insert_purchase"  method="post">      
 
                         <div class="row">
 
@@ -141,6 +140,7 @@
     margin: 5px;
 ">
 
+<input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 
 
               <div class="table-responsive" id="quotation_service1">
@@ -170,7 +170,7 @@
                                         <td class="span3 supplier">
                                            <input type="text" value="<?php echo $invoice_product[0]['product_name']; ?>" name="product_name" required class="form-control product_name productSelection" onkeypress="product_pur_or_list_by_company(1);" placeholder="<?php echo display('product_name') ?>" id="product_name_1" tabindex="5" >
 
-                                            <input type="hidden" class="autocomplete_hidden_value product_id_1" name="product_id" id="SchoolHiddenId"/>
+                                            <input type="hidden" class="autocomplete_hidden_value product_id_1"value="<?php echo $invoice_product[0]['product_id']; ?>" name="product_id" id="SchoolHiddenId"/>
 
                                             <input type="hidden" class="sl" value="1">
 
@@ -245,7 +245,7 @@
                                            
 
                                             <td class="text-right">
-                                                <input class="form-control total_price text-right" type="text" name="area"  id="total_price_1" value="{area}" readonly="readonly" value="2" />
+                                                <input class="form-control total_price text-right" type="text" name="total_price[]"  id="total_price_1" value="{area}" readonly="readonly" value="2" />
                                             </td>
                                             
                                             <td>
@@ -260,7 +260,7 @@
                                         <td class="text-right" colspan="3"><b><?php echo display('total') ?>:</b></td>
 
                                         <td class="text-right">
-                                            <input type="text" value="<?php echo $invoice_detail[0]['total']; ?>" id="Total" class="text-right form-control" name="total[]" value="0.00" readonly="readonly" />
+                                            <input type="text" value="<?php echo $invoice_detail[0]['total']; ?>" id="Total" class="text-right form-control" name="total" value="0.00" readonly="readonly" />
                                         </td>
                                         <td> <button type="button" id="add_invoice_item" class="btn btn-info" name="add-invoice-item"  onClick="addpackingList('addPurchaseItem')"  tabindex="9"/><i class="fa fa-plus"></i></button>
                                              <input type ="hidden" name="csrf_test_name" id="" value="<?php echo $this->security->get_csrf_hash();?>">
@@ -309,8 +309,11 @@
                     </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
-                                <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-packing-list" value="Update" />
-                               
+                            <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-packing-list" value="Save" />
+                              
+                              <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+
+<a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>      
                             </div>
                         </div>
 
@@ -342,7 +345,7 @@
                         </div>
 
  
-                    <?php echo form_close()?>
+                            </form><input type="hidden" id="invoice_hdn"/> <input type="hidden" id="invoice_hdn1"/>
                     </div>
                 </div>
 
@@ -351,6 +354,70 @@
     </section>
 </div>
 <!-- Purchase Report End -->
+<div class="modal fade" id="myModal1" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expenses - PackingList</h4>
+        </div>
+        <div class="modal-body" style="font-weight:bold;text-align:center;">
+          
+          <h4>PackingList Updated Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+          <div id="myModal3" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your Invoice is not submitted. Would you like to submit or discard
+				</p>
+				<p class="text-warning">
+					<small>If you don't save, your changes will not be saved.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary pull-left">Yes</button>
+				<button type="button" class="btn btn-primary pull-left">No</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>   
+<div class="modal fade" id="exampleModalLong" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expenses - PackingList</h4>
+        </div>
+        <div class="modal-body" id="bodyModal1" style="font-weight:bold;text-align:center;">
+          
+       
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 <script type="text/javascript">
     function add()
@@ -513,6 +580,88 @@ $(document).ready(function(){
   
 });
     
+$('#insert_purchase').submit(function (event) {
+    var dataString = {
+        dataString : $("#insert_purchase").serialize()
+    
+   };
+   dataString[csrfName] = csrfHash;
+  
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"<?php echo base_url(); ?>Cpurchase/insert_packing_list",
+        data:$("#insert_purchase").serialize(),
+
+        success:function (data) {
+        console.log(data);
+   
+            var split = data.split("/");
+            $('#invoice_hdn1').val(split[0]);
+         
+     
+            $('#invoice_hdn').val(split[1]);
+            $("#myModal1").find('.modal-body').text('Packing List Updated Successfully');
+            $('#final_submit').show();
+$('#download').show();
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+$("#bodyModal1").html("");
+ },2500);
+
+
+       }
+
+    });
+    event.preventDefault();
+});
+$('#download').on('click', function (e) {
+
+ var popout = window.open("<?php  echo base_url(); ?>Cpurchase/packing_list_details_data/"+$('#invoice_hdn1').val());
+ 
+    window.setTimeout(function(){
+         popout.close();
+        
+      }, 1500);
+      e.preventDefault();
+
+});  
+var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
+var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
+        $(document).ready(function(){
+            $('#final_submit').hide();
+$('#download').hide();
+   });
+$('#final_submit').on('click', function (e) {
+
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Packing List No : "+$('#invoice_hdn').val()+" has been Updated Successfully";
+  
+    console.log(input_hdn);
+    $("#myModal1").find('.modal-body').text(input_hdn);
+   // $("#bodyModal1").html(input_hdn);
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+ },2500);
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_packing_list";
+      }, 2500);
+       
+});
+
+window.onbeforeunload = function(){
+    if(!window.btn_clicked){
+        return 'Your Invoice is not submitted. Would you like to submit or discard';
+    }
+};
 
 
 </script>

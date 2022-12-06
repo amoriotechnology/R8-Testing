@@ -70,7 +70,7 @@ class Service extends CI_Model {
 
         }
 
-        return false;
+      
 
     }
 

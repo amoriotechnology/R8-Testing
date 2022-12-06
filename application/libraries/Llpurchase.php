@@ -946,6 +946,7 @@ class Llpurchase {
             'customer_id'   => $purchase_detail[0]['customer_id'],
 
             'bill_to'   => $purchase_detail[0]['bill_to'],
+            'container_no'   => $purchase_detail[0]['container_no'],
 
             'purchase_info' => $purchase_detail,
 
@@ -1202,6 +1203,7 @@ class Llpurchase {
        //Trucking details data
 
       public function trucking_details_data($purchase_id) {
+      
         $CI = & get_instance();
         $CI->load->model('Ppurchases');
         $CI->load->model('Web_settings');
@@ -1235,6 +1237,7 @@ class Llpurchase {
        $datacontent = $CI->invoice_content->retrieve_data();
         // print_r($datacontent); die();
      $data = array(
+   //     'value'=>$value,
         'curn_info_default' =>$curn_info_default[0]['currency_name'],
         'currency'  =>$currency_details[0]['currency'],
             'header'=> $dataw[0]['header'],
@@ -1273,7 +1276,7 @@ class Llpurchase {
             'Web_settings'     => $currency_details,
         );
         // echo "<pre>";
-        // print_r($data);die();
+       
         $chapterList = $CI->parser->parse('purchase/trucking_invoice_html', $data, true);
         return $chapterList;
     }

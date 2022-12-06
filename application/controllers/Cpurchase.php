@@ -306,9 +306,7 @@ $CI = & get_instance();
         $CI->load->model('Purchases');
         $data=$CI->Purchases->purchase_entry();
 
-           echo $data;  
-           $this->session->set_userdata(array('newexpenseid' =>$data)); 
-           redirect('Cpurchase');
+        echo json_encode($data);
          
          
     
@@ -323,15 +321,9 @@ $CI = & get_instance();
         $CI->auth->check_admin_auth();
         $CI->load->model('Purchases');
         $invoice_id=$CI->Purchases->packing_list_entry();
-
-        $this->session->set_userdata(array('expense_packing_id' =>$invoice_id));
-        if (isset($_POST['add-packing-list'])) {
-            redirect(base_url('Cpurchase/add_packing_list'));
-            exit;
-        } elseif (isset($_POST['add-packing-list-another'])) {
-            redirect(base_url('Cpurchase'));
-            exit;
-        }
+      
+        echo json_encode($invoice_id);
+        
     }
  public function insert_purchase_order() {
    $CI = & get_instance();
@@ -339,51 +331,28 @@ $CI = & get_instance();
         $CI->load->model('Purchases');
         $invoice_id=$CI->Purchases->purchase_order_entry();
 
-       
-        $this->session->set_userdata(array('purchase_orderid' => $invoice_id));
-        if (isset($_POST['add-purchase-order'])) {
-            redirect(base_url('Cpurchase/purchase_order'));
-            exit;
-        } elseif (isset($_POST['add-purchase-order-another'])) {
-            redirect(base_url('Cpurchase/purchase_order'));
-            exit;
-        }
+       echo json_encode($invoice_id);
+      
     }
     public function insert_ocean_import() {
         $CI = & get_instance();
         $CI->auth->check_admin_auth();
         $CI->load->model('Purchases');
         $purchase_id=$CI->Purchases->ocean_import_entry();
-        $this->session->set_userdata(array('expenseoceanid' => $purchase_id));
-        if (isset($_POST['add-ocean-import'])) {
-            redirect(base_url('Cpurchase/ocean_import_tracking'));
-            exit;
-        } elseif (isset($_POST['add-ocean-import-another'])) {
-            redirect(base_url('Cpurchase/ocean_import_tracking'));
-            exit;
-        }
+      
+        echo json_encode($purchase_id);
     }
 
 
 
-      public function insert_trucking() {
-
-        $CI = & get_instance();
-        $CI->auth->check_admin_auth();
-        $CI->load->model('Purchases');
-       $purchaseid=$CI->Purchases->trucking_entry();
-        
-        $this->session->set_userdata(array('expensetruckingid' => $purchaseid));
-
-
-        if (isset($_POST['add-trucking'])) {
-            redirect(base_url('Cpurchase/trucking'));
-            exit;
-        } elseif (isset($_POST['add-trucking-another'])) {
-            redirect(base_url('Cpurchase/trucking'));
-            exit;
-        }
-    }
+    public function insert_trucking() {
+      $CI = & get_instance();
+            $CI->auth->check_admin_auth();
+            $CI->load->model('Purchases');
+           $purchaseid=$CI->Purchases->trucking_entry();
+         
+           echo json_encode($purchaseid);
+      }
 
 
     //purchase Update Form
@@ -444,8 +413,8 @@ $CI = & get_instance();
         $CI->load->model('Purchases');
         $CI->Purchases->update_purchase();
         $this->session->set_userdata(array('message' => display('successfully_updated')));
-        redirect(base_url('Cpurchase/manage_purchase'));
-        exit;
+        //redirect(base_url('Cpurchase/manage_purchase'));
+     //   exit;
     }
 
       // purchase Update
@@ -502,10 +471,12 @@ $CI = & get_instance();
         $supplier_id = $this->input->post('supplier_id',TRUE);
         $product_name = $this->input->post('product_name',TRUE);
         $product_info = $CI->Suppliers->product_search_item($supplier_id, $product_name);
+     
         if(!empty($product_info)){
         $list[''] = '';
         foreach ($product_info as $value) {
             $json_product[] = array('label'=>$value['product_name'].'('.$value['product_model'].')','value'=>$value['product_id']);
+           
         } 
     }else{
         $json_product[] = 'No Product Found';
@@ -553,6 +524,7 @@ $CI = & get_instance();
         $this->load->model('Purchases');
         $this->load->model('invoice_design');
         $invoice_no = $this->uri->segment(3); 
+        
         $data['invoice'] =$this->Purchases->get_purchases_invoice($invoice_no);
         $data['order'] =$this->Purchases->get_purchases_order($invoice_no);
         $data['supplier'] =$this->Purchases->get_supplier($invoice_no);
@@ -626,7 +598,7 @@ $data=array(
             'product' => $packing_details[0]['product_name'],
             'packing_details' => $packing_details
         );
-            //  print_r($packing_details); exit();
+      
        // echo $content = $CI->linvoice->invoice_add_form();
         $content = $this->load->view('purchase/packing_invoice_html', $data, true);
         //$content='';
@@ -644,6 +616,13 @@ $data=array(
         $this->template->full_admin_html_view($content);
     }
 
+
+    public function delete_trucking() {
+        $delvalue = $this->input->post('dataString',TRUE);
+        $this->db->where('trucking_id', $dataString);
+        $this->db->delete('expense_trucking');
+        echo $this->db->last_query();
+    }
 
 
     public function delete_purchase($purchase_id = null) {

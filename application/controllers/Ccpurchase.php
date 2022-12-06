@@ -525,11 +525,11 @@ class Ccpurchase extends CI_Controller {
         $CI = & get_instance();
         $CI->auth->check_admin_auth();
         $CI->load->library('llpurchase');
+       // $value = $this->input->post('value',TRUE);
         $content = $CI->llpurchase->trucking_details_data($purchase_id);
-        echo $content ;
-        die();
+     
         $this->template->full_admin_html_view($content);
-
+echo json_encode($content);
 
         // $CI = & get_instance();
         // $CI->auth->check_admin_auth();

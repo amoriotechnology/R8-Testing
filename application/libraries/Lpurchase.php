@@ -782,7 +782,13 @@ class Lpurchase {
 
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
 
+        $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+        $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
+      
+
         $data = array(
+            'curn_info_default' =>$curn_info_default[0]['currency_name'],
+            'currency' => $currency_details[0]['currency'],
 
             'title'         => display('purchase_edit'),
 
@@ -876,12 +882,16 @@ class Lpurchase {
 
         }
 
-
-
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+        $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
+      
 
+
+        
         $data = array(
-
+            'curn_info_default' =>$curn_info_default[0]['currency_name'],
+          
+            'currency' => $currency_details[0]['currency'],
             'title'  => display('purchase_edit'),
 
             'ship_to'  => $purchase_detail[0]['ship_to'],
@@ -1025,16 +1035,16 @@ class Lpurchase {
             'particular' => $purchase_detail[0]['particular'],
 
             'attachment' => $purchase_detail[0]['attachment'],
-
+'remarks' => $purchase_detail[0]['remarks'],
             'status'  => $purchase_detail[0]['status'],
+            'country_origin'  => $purchase_detail[0]['country_origin'],
 
-          
+          'supplier_list'=>$supplier_list,
 
+            'supplier_name'   => $purchase_detail[0]['supplier_name'],
             'supplier_id'   => $purchase_detail[0]['supplier_id'],
 
-
         );
-
 
 
         $chapterList = $CI->parser->parse('purchase/edit_ocean_import_tracking_form', $data, true);
@@ -1087,9 +1097,11 @@ class Lpurchase {
 
 
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
-
+        $all_supplier = $CI1->Purchases->select_all_supplier();
+        $get_customer= $this->accounts_model->get_customer();
         $data = array(
-
+            'customer_list' => $get_customer,
+            'all_supplier'  => $all_supplier,
             'title'         => display('purchase_edit'),
 
             'trucking_id'   => $purchase_detail[0]['trucking_id'],

@@ -589,8 +589,7 @@ echo json_encode($data);
         $CI->load->model('Invoices');
 
         $invoice_id = $CI->Invoices->invoice_entry();
-print_r($invoice_id);
-die();
+
         if(!empty($invoice_id)){
 
         $data['status'] = true;
@@ -623,7 +622,7 @@ die();
 
         }
 
-print_r($data);
+
 
         echo json_encode($data);
 

@@ -247,7 +247,29 @@ elseif($template==3)
          </div>
     </section> <!-- /.content -->
 </div> <!-- /.content-wrapper -->
+<div class="modal fade" id="myModal1" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="width: 500px;height:100px;text-align:center;margin-top: 100px;">
+        <div class="modal-header" style="">
+      
+          <h4 class="modal-title">Expenses - Ocean Import</h4>
+        </div>
+        <div class="content">
 
+        <div class="modal-body">
+          
+          <h4>Ocean Import Downloaded Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+        </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 <style>
 
 .key{
@@ -372,7 +394,56 @@ table th, table td {
 @media only screen and (max-width: 600px) {
     
 }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+}
 
+.modal .content {
+  position: relative;
+  padding: 10px;
+ 
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: rgba(112, 128, 175, 0.2) 0px 16px 24px 0px;
+  transform: scale(0);
+  transition: transform 300ms cubic-bezier(0.57, 0.21, 0.69, 1.25);
+}
+
+.modal .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #7080af;
+  clip-path: polygon(0 10%, 10% 0, 50% 40%, 89% 0, 100% 10%, 60% 50%, 100% 90%, 90% 100%, 50% 60%, 10% 100%, 0 89%, 40% 50%);
+}
+
+.modal.open {
+    background-color:#38469f;
+  opacity: 1;
+  visibility: visible;
+}
+.modal.open .content {
+  transform: scale(1);
+}
+.content-wrapper.blur {
+  filter: blur(5px);
+}
+.content {
+    min-height: 0px;
+}
 
 </style>      
 
@@ -416,9 +487,22 @@ $(document).ready(function () {
     pdf.setFontSize(10);
     pdf.setTextColor(150);
   }
-  var timer = setTimeout(function() {
-            window.location='<?php  echo base_url();   ?>'+'Ccpurchase/manage_ocean_import_tracking'
-        }, 10);
-  }).save();
-   });
-   </script>
+}).save();
+
+});
+   window.setTimeout(function(){
+   
+   window.location ="<?php  echo base_url(); ?>Ccpurchase/manage_ocean_import_tracking";
+
+	 }, 2000);
+  
+  $( '.modal' ).addClass( 'open' );
+
+if ( $( '.modal' ).hasClass( 'open' ) ) {
+ $( '.container' ).addClass( 'blur' );
+} 
+$( '.close' ).click(function() {
+ $( '.modal' ).removeClass( 'open' );
+ $( '.cont' ).removeClass( 'blur' );
+});
+</script>

@@ -1334,7 +1334,7 @@ return $output;
     //Count purchase
     public function purchase_entry() {
         $purchase_id = date('YmdHis');
-
+        $chalan_no =$this->input->post('chalan',TRUE);
         $p_id = $this->input->post('product_id',TRUE);
         $supplier_id = $this->input->post('supplier_id',TRUE);
         $supinfo =$this->db->select('*')->from('supplier_information')->where('supplier_id',$supplier_id)->get()->row();
@@ -1418,11 +1418,21 @@ return $output;
             'payment_type'       =>  $this->input->post('paytype',TRUE),
              'image'              =>  $profile_img,
         );
-     
+        $purchase_id_1 = $this->db->where('chalan_no',$this->input->post('chalan',TRUE));
+        $q=$this->db->get('product_purchase');
+        $row = $q->row_array();
+    if(!empty($row['purchase_id'])){
+        $this->session->set_userdata("purchase_1",$row['purchase_id']);
+   $this->db->where('purchase_id', $this->session->userdata("purchase_1"));
+  $this->db->delete('product_purchase');
         $this->db->insert('product_purchase', $data);
-
-        //Supplier Credit
-        $purchasecoatran = array(
+   }   
+    else{
+    $this->db->insert('product_purchase', $data);
+    }
+    $purchase_id = $this->db->select('purchase_id')->from('product_purchase')->where('chalan_no',$this->input->post('chalan',TRUE))->get()->row()->purchase_id;
+      $this->session->set_userdata("purchase_2",$purchase_id);
+    $purchasecoatran = array(
           'VNo'            =>  $purchase_id,
           'Vtype'          =>  'Purchase',
           'VDate'          =>  $this->input->post('purchase_date',TRUE),
@@ -1549,7 +1559,7 @@ return $output;
 
             $data1 = array(
                 'purchase_detail_id' => $this->generator(15),
-                'purchase_id'        => $purchase_id,
+                'purchase_id'        => $this->session->userdata("purchase_2"),
                 'product_id'         => $product_id,
                 'quantity'           => $product_quantity,
                 'rate'               => $product_rate,
@@ -1560,13 +1570,16 @@ return $output;
                 'status'             => 1
             );
 
-            if (!empty($quantity)) {
-                $this->db->insert('product_purchase_details', $data1);
-                $this->session->set_userdata(array('purchase_id' =>$purchase_id));
-            }
-        }
+           
+            $this->db->where('purchase_id', $this->session->userdata("purchase_1"));
 
-        return $purchase_id;
+            $this->db->delete('product_purchase_details');
+            $this->db->insert('product_purchase_details', $data1);
+
+            
+        }
+        return $purchase_id."/".$chalan_no;
+       
     }
 
 
@@ -1576,6 +1589,7 @@ return $output;
     public function packing_list_entry() {
        
         $purchase_id  = date('YmdHis');
+        $invoice_no =$this->input->post('invoice_no',TRUE);
         $p_id = $this->input->post('product_id',TRUE);
         // $supplier_id = $this->input->post('supplier_id',TRUE);
         // $supinfo =$this->db->select('*')->from('supplier_information')->where('supplier_id',$supplier_id)->get()->row();
@@ -1623,7 +1637,32 @@ return $output;
             'status'             => 1,
             'remarks' => $this->input->post('remarks',TRUE)
         );
+        
 
+     
+        $purchase_id_1 = $this->db->where('invoice_no',$this->input->post('invoice_no',TRUE));
+        $q=$this->db->get('expense_packing_list');
+        $row = $q->row_array();
+    if(!empty($row['expense_packing_id'])){
+        $this->session->set_userdata("packing_1",$row['expense_packing_id']);
+      
+        $this->db->where('invoice_no',$this->input->post('invoice_no',TRUE));
+ 
+        $this->db->delete('expense_packing_list');
+      //  echo $this->db->last_query();
+        $this->db->insert('expense_packing_list', $data);
+      // echo $this->db->last_query();
+    }   
+    else{
+    $this->db->insert('expense_packing_list', $data);
+   // echo $this->db->last_query();
+    }
+   // echo $this->db->last_query();
+       //  $this->db->insert('expense_packing_list', $data);
+     
+       $purchase_id = $this->db->select('expense_packing_id')->from('expense_packing_list')->where('invoice_no',$this->input->post('invoice_no',TRUE))->get()->row()->expense_packing_id;
+    
+       $this->session->set_userdata("packing_2",$purchase_id);
 
     // print_r($data);
    
@@ -1649,9 +1688,6 @@ return $output;
        //new end
 
 
-        
-       
-        $this->db->insert('expense_packing_list', $data);
       
         if($this->input->post('paytype') == 2){
           if(!empty($paid_amount)){
@@ -1687,7 +1723,7 @@ return $output;
             $data1 = array(
                 'product_id'   =>  $p_id,
                 'expense_packing_detail_id' => $this->generator(15),
-                'expense_packing_id'        => $purchase_id,
+                'expense_packing_id'        => $this->session->userdata("packing_2"),
                 'serial_no'         => $serial,
                 'slab_no'               => $slabno,
                 'height' => $heightt,
@@ -1698,12 +1734,19 @@ return $output;
                 'status'             => 1
             );
 
-            if (!empty($serial_number)) {
-                $this->db->insert('expense_packing_list_detail', $data1);
-            }
-        }
+           
+            $this->db->where('expense_packing_id', $this->session->userdata("packing_1"));
+ 
+            $this->db->delete('expense_packing_list_detail');
+            $this->db->insert('expense_packing_list_detail', $data1);
 
-        return $purchase_id;
+
+
+           
+            
+        }
+        return $purchase_id."/".$invoice_no;
+       
     }
 
 
@@ -1712,7 +1755,7 @@ return $output;
      //Purchase Order Entry
      public function purchase_order_entry() {
         $purchase_id = date('YmdHis');
-
+$chalan_no =$this->input->post('chalan_no',TRUE);
         $p_id = $this->input->post('product_id',TRUE);
         $supplier_id = $this->input->post('supplier_id',TRUE);
         $supinfo =$this->db->select('*')->from('supplier_information')->where('supplier_id',$supplier_id)->get()->row();
@@ -1868,11 +1911,28 @@ return $output;
  // Bank summary for credit
 
        //new end
+     
+       $purchase_id_1 = $this->db->where('chalan_no',$this->input->post('chalan_no',TRUE));
+       $q=$this->db->get('purchase_order');
+       $row = $q->row_array();
+     //  echo $row['purchase_order_id'];
+      if(!empty($row['purchase_order_id'])){
+       $this->session->set_userdata("SESSION_NAME_1",$row['purchase_order_id']);
+     
+       $this->db->where('chalan_no', $this->input->post('chalan_no',TRUE));
 
-
-        
-       
+       $this->db->delete('purchase_order');
+  
         $this->db->insert('purchase_order', $data);
+      }
+      else{
+        $this->db->insert('purchase_order', $data);
+      }
+        $purchase_id = $this->db->select('purchase_order_id')->from('purchase_order')->where('chalan_no',$this->input->post('chalan_no',TRUE))->get()->row()->purchase_order_id;
+    
+        $this->session->set_userdata("SESSION_NAME",$purchase_id);
+       
+      
         $this->db->insert('acc_transaction',$coscr);
         $this->db->insert('acc_transaction',$purchasecoatran);  
         $this->db->insert('acc_transaction',$expense);
@@ -1907,7 +1967,7 @@ return $output;
 
             $data1 = array(
                 'purchase_order_detail_id' => $this->generator(15),
-                'purchase_id'        => $purchase_id,
+                'purchase_id'        =>  $this->session->userdata("SESSION_NAME"),
                 'product_id'         => $product_id,
                 'slabs'              => $slabs,
                 'quantity'           => $product_quantity,
@@ -1917,14 +1977,24 @@ return $output;
                 'create_by'          => $this->session->userdata('user_id'),
                 'status'             => 1
             );
+          //  
+      //    SESSION_NAME_1
+          //  echo $purchase_id;
+          //  $this->db->where('purchase_id', $purchase_id );
 
-            if (!empty($quantity)) {
-                $this->db->insert('purchase_order_details', $data1);
-            }
+           // $this->db->delete('purchase_order_details');
+         //   echo $this->db->last_query();
+          //  if (!empty($quantity)) {
+          
+            $this->db->where('purchase_id', $this->session->userdata("SESSION_NAME_1"));
+ 
+            $this->db->delete('purchase_order_details');
+            $this->db->insert('purchase_order_details', $data1);
+               
+           // }
         }
-    
-
-        return $purchase_id;
+      
+        return $purchase_id."/".$chalan_no;
     }
 
 
@@ -1991,10 +2061,31 @@ return $output;
             'create_by'       =>  $this->session->userdata('user_id'),
             );
 
-          $query= $this->db->insert('ocean_import_tracking', $data);
+
+            $purchase_id_1 = $this->db->where('booking_no',$this->input->post('booking_no',TRUE));
+            $q=$this->db->get('ocean_import_tracking');
+            $row = $q->row_array();
+        if(!empty($row['booking_no'])){
+            $this->session->set_userdata("ocean_import_1",$row['booking_no']);
+          
+            $this->db->where('booking_no',$this->input->post('booking_no',TRUE));
+     
+            $this->db->delete('ocean_import_tracking');
+          //  echo $this->db->last_query();
+            $this->db->insert('ocean_import_tracking', $data);
+          // echo $this->db->last_query();
+        }   
+        else{
+        $this->db->insert('ocean_import_tracking', $data);
+       // echo $this->db->last_query();
+        }
+ 
+           
+        
+      //    $query= $this->db->insert('ocean_import_tracking', $data);
      
 
-       return $purchase_id;
+       return $purchase_id."/".$this->input->post('booking_no',TRUE);
     }
 
         public function voucher_no()
@@ -2022,7 +2113,7 @@ return $output;
     {
       return  $data = $this->db->select("invoice_no as voucher")
             ->from('expense_trucking') 
-            ->like('invoice_no', 'TL', 'after')
+            ->like('invoice_no', 'T', 'after')
             ->order_by('ID','desc')
             ->get()
             ->result_array();
@@ -2035,8 +2126,9 @@ return $output;
      public function trucking_entry() {
 
         $purchase_id = date('YmdHis');
-
+        $invoice_no= $this->input->post('invoice_no',TRUE);
         $p_id = $this->input->post('product_id',TRUE);
+      
       //  $supplier_id = $this->input->post('supplier_id',TRUE);
       //  $supinfo =$this->db->select('*')->from('supplier_information')->where('supplier_id',$supplier_id)->get()->row();
       //  $sup_head = $supinfo->supplier_id.'-'.$supinfo->supplier_name;
@@ -2070,13 +2162,26 @@ return $output;
             'remarks'             => $this->input->post('remarks',TRUE),
           
         );
-
-
+        $purchase_id_1 = $this->db->where('invoice_no',$this->input->post('invoice_no',TRUE));
+        $q=$this->db->get('expense_trucking');
+        $row = $q->row_array();
+    if(!empty($row['trucking_id'])){
+        $this->session->set_userdata("trucking_1",$row['trucking_id']);
+      
+        $this->db->where('invoice_no',$this->input->post('invoice_no',TRUE));
+ 
+        $this->db->delete('expense_trucking');
         $this->db->insert('expense_trucking', $data);
-        // $this->db->insert('acc_transaction',$coscr);
-        // $this->db->insert('acc_transaction',$purchasecoatran);  
-        // $this->db->insert('acc_transaction',$expense);
-        if($this->input->post('paytype') == 2){
+   }   
+    else{
+    $this->db->insert('expense_trucking', $data);
+    }
+       $purchase_id = $this->db->select('trucking_id')->from('expense_trucking')->where('invoice_no',$this->input->post('invoice_no',TRUE))->get()->row()->trucking_id;
+    
+       $this->session->set_userdata("trucking_2",$purchase_id);
+
+
+       if($this->input->post('paytype') == 2){
           if(!empty($paid_amount)){
         $this->db->insert('acc_transaction',$bankc);
        
@@ -2114,7 +2219,7 @@ return $output;
                 $total =  $t_price[$i];
                 $data1 = array(
                     'expense_trucking_detail_id' => $this->generator(15),
-                    'expense_trucking_id'        => $purchase_id,
+                    'expense_trucking_id'        =>  $this->session->userdata("trucking_2"),
                     'trucking_date' =>$trucking_date,
                    
                     'qty'           => $product_quantity,
@@ -2126,15 +2231,20 @@ return $output;
                     'create_by'          =>  $this->session->userdata('user_id'),
                     'status'             => 1
                 );
+             
+            $this->db->where('expense_trucking_id', $this->session->userdata("trucking_1"));
+              $this->db->delete('expense_trucking_details');
+
+              $this->db->insert('expense_trucking_details', $data1);
               
           //  if (!empty($quantity)) {
-                $this->db->insert('expense_trucking_details', $data1);
+               
           //  }
    
     }
        // echo $rowCount;
 
-        return $purchase_id;
+        return $purchase_id."/".$invoice_no;
     }
 
     //Retrieve purchase Edit Data
@@ -2201,12 +2311,14 @@ return $output;
 
        //Retrieve ocean import tracking Edit Data
     public function retrieve_ocean_import_tracking_editdata($purchase_id) {
-        $this->db->select('*');
-        $this->db->from('ocean_import_tracking');
-        $this->db->where('create_by',$this->session->userdata('user_id'));
-        $this->db->where('ocean_import_tracking_id', $purchase_id);
+        $this->db->select('a.*,b.*');
+        $this->db->from('ocean_import_tracking a');
+        $this->db->join('supplier_information b', 'b.supplier_id =a.supplier_id');
+        $this->db->where('a.create_by',$this->session->userdata('user_id'));
+        $this->db->where('a.ocean_import_tracking_id', $purchase_id);
         // $this->db->order_by('a.purchase_details', 'asc');
         $query = $this->db->get();
+      
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }
@@ -2474,9 +2586,10 @@ public function get_purchases_invoice($invoice_no='')
     
 
 }
-public function get_purchases_order($invoice_no='')
+public function get_purchases_order($invoice_no)
 {
 
+   
     $this->db->where('purchase_id',$invoice_no);
     $this->db->select('po.*,pi.*');
     $this->db->from('purchase_order_details po');
@@ -2735,6 +2848,7 @@ public function company_info()
         $this->db->where('a.purchase_id', $purchase_id);
         $this->db->group_by('d.product_id');
         $query = $this->db->get(); 
+     
         if ($query->num_rows() > 0) {
             
             return $query->result_array();
@@ -2752,6 +2866,7 @@ public function company_info()
      $this->db->where('a.expense_packing_id' , $expense_packing_id);
          $query = $this->db->get();
       //  $query = $this->db->query($sql);
+    //  echo $this->db->last_query();
         if ($query->num_rows() > 0) {
             return $query->result_array();
         }

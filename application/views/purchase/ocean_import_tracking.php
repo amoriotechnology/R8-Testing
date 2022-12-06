@@ -61,8 +61,8 @@
                     </div>
 
                     <div class="panel-body">
-                    <?php echo form_open_multipart('Cpurchase/insert_ocean_import',array('class' => 'form-vertical', 'id' => 'insert_ocean_import','name' => 'insert_ocean_import'))?>
-                        
+                    <form id="insert_ocean"  method="post">  
+                  
 
                         <div class="row">
                              <div class="col-sm-6">
@@ -189,7 +189,7 @@
                                     <select  id="adress" name="consignee" class="form-control " required="" tabindex="1"> 
                                             <option value=" "><?php echo display('select_one') ?></option>
                                             {customer_list}
-                                            <option value="{customer_name}">{customer_name}</option>
+                                            <option value="{customer_id}">{customer_name}</option>
                                             {/customer_list}
                                         </select>
                                        
@@ -307,7 +307,8 @@
                             </div>
                         </div>
 
-
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+                        <input type="hidden" id="invoice_hdn1"/>
 
                         <div class="row">
 
@@ -334,7 +335,7 @@
                         </div>
 
 
-
+                        <input type="hidden" id="invoice_hdn"/>
 
                         <div class="row">
 
@@ -373,19 +374,16 @@
                                 <input type="submit" id="add_purchase"  class="btn btn-primary btn-large" name="add-ocean-import" value="<?php echo display('save') ?>" />
                                 
 
-                                <?php 
-                                if(isset($_SESSION['expenseoceanid']))
-                                { 
-                                    ?>
-                                    <a href="<?php echo base_url('Ccpurchase/manage_ocean_import_tracking/'); ?>" style="color:#fff;" class="btn btn-primary">Submit</a>
-                                    <a  href="<?php echo  base_url('Cpurchase/ocean_import_tracking_details_data/'); ?><?php echo $_SESSION['expenseoceanid']; ?>" class="btn btn-primary">Download</a>
-                                <?php } ?>
+                             
+                                <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+
+<a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
                             </div>
                         </div>
 
 
 
-                    <?php echo form_close()?>
+                                </form>
                     </div>
                 </div>
 
@@ -575,11 +573,33 @@
       <div class="modal-content" style="    margin-top: 190px;">
         <div class="modal-header" style="">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Ocean Import</h4>
+          <h4 class="modal-title">Expenses - Ocean Import</h4>
         </div>
         <div class="modal-body">
           
-          <h4>Ocean Import  Created Succefully</h4>
+          <h4>Ocean Import Created Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <div class="modal fade" id="exampleModalLong" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expenses - Trucking</h4>
+        </div>
+        <div class="modal-body" id="bodyModal1" style="font-weight:bold;text-align:center;">
+          
+       
      
         </div>
         <div class="modal-footer">
@@ -599,17 +619,88 @@
          </script>
 
 
-<?php 
 
-    if(isset($_SESSION['expenseoceanid']))
-        { ?>
 
     <script type="text/javascript">
+            var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
+var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
         $(document).ready(function(){
 
-
-           $('#myModal1').modal('show');
-           hide();
+            $('#final_submit').hide();
+$('#download').hide();
+        
         });
+        $('#insert_ocean').submit(function (event) {
+    var dataString = {
+        dataString : $("#insert_ocean").serialize()
+    
+   };
+   dataString[csrfName] = csrfHash;
+  
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"<?php echo base_url(); ?>Cpurchase/insert_ocean_import",
+        data:$("#insert_ocean").serialize(),
+
+        success:function (data) {
+        console.log(data);
+   
+            var split = data.split("/");
+           
+           
+     
+            $('#invoice_hdn').val(split[0]);
+            $('#invoice_hdn1').val(split[1]);
+       }
+
+    });
+    event.preventDefault();
+});
+$('#download').on('click', function (e) {
+var link= $('#invoice_hdn').val();
+console.log(link);
+ var popout = window.open("<?php  echo base_url(); ?>Cpurchase/ocean_import_tracking_details_data/"+link);
+ 
+    window.setTimeout(function(){
+         popout.close();
+      
+      }, 1500);
+      e.preventDefault();
+
+});  
+$('#add_purchase').on('click', function (e) {
+    
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+ },2500);
+
+$('#final_submit').show();
+$('#download').show();
+});
+$('#final_submit').on('click', function (e) {
+
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Booking No :"+$('#invoice_hdn1').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+  window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_trucking";
+      }, 2000);
+       
+});
+
+window.onbeforeunload = function(){
+    if(!window.btn_clicked){
+        return 'Your Invoice is not submitted. Would you like to submit or discard';
+    }
+};
     </script>
-    <?php } ?>
+ 

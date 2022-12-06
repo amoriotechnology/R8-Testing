@@ -74,8 +74,7 @@ textarea:focus, input:focus{
                     </div>
 
                     <div class="panel-body">
-                    <?php echo form_open_multipart('Cpurchase/insert_trucking',array('class' => 'form-vertical', 'id' => 'insert_trucking','name' => 'insert_trucking'))?>
-                        
+                    <form id="insert_trucking"  method="post">         
 
                         <div class="row">
 
@@ -85,16 +84,25 @@ textarea:focus, input:focus{
                                         <i class="text-danger"></i>
                                     </label>
                                     <div class="col-sm-8">
+                          
                                         <input type="text" tabindex="3" class="form-control" name="invoice_no" value="<?php if(!empty($voucher_no[0]['voucher'])){
                                 $curYear = date('Y'); 
                                 $month = date('m');
-                               $vn = substr($voucher_no[0]['voucher'],9)+1;
-                               echo $voucher_n = 'TI'. $curYear.$month.'-'.$vn;
-                             }else{
+                                $voucher_no[0]['voucher']=str_replace("T","",$voucher_no[0]['voucher']);
+                                $x=explode("-",$voucher_no[0]['voucher']);
+                         
+                           
+                           $vn=$x[1]+1;
+                         
+                            echo $voucher_n = 'T'. $curYear.$month.'-'.$vn;
+                            }else{
                                     $curYear = date('Y'); 
                                 $month = date('m');
-                               echo $voucher_n = 'TI'. $curYear.$month.'-'.'1';
-                             } ?>" readonly />
+                             //   echo  "sdf";
+                            echo $voucher_n = 'T'. $curYear.$month.'-'.'1';
+                            } ?>" readonly />
+                               
+                            
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +260,8 @@ textarea:focus, input:focus{
                            
                         </div>
                     
-
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
+  
                        
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover" id="truckingTable">
@@ -420,13 +429,10 @@ textarea:focus, input:focus{
     
                                         <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-trucking"  value="<?php echo display('Save') ?>" />
 
-                                        <?php 
-                                       if(isset($_SESSION['expensetruckingid']))
-                                        {
-                                            ?>
-                                            <a href="<?php echo base_url('Ccpurchase/manage_trucking'); ?>" style="color: #fff;" class='btn btn-primary'>Submit</a>
+                                  
+                                            <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
 
-                                              <a href="<?php echo base_url('Ccpurchase/trucking_details_data/'); ?><?php echo $_SESSION['expensetruckingid']; ?>" style="color: #fff;" class='btn btn-primary'>Download</a>
+                                              <a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
                                     </td>
                                     <td>&nbsp;</td>
                                     <td id="btn1_download">
@@ -434,10 +440,7 @@ textarea:focus, input:focus{
                                         
 
                                     </td>
-                                     <?php
-                                        }
-
-                                        ?>
+                                  
                                   
                                   
                                     
@@ -445,7 +448,7 @@ textarea:focus, input:focus{
                                </table>
                             </div>
                         </div>
-                    <?php echo form_close()?>
+                                           </form>
                     </div>
                 </div>
 
@@ -454,27 +457,7 @@ textarea:focus, input:focus{
     </section>
 
 </div>
-<div class="modal fade" id="myModal1" role="dialog" >
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content" style="    margin-top: 190px;">
-        <div class="modal-header" style="">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title"><?php echo display('new_invoice') ?></h4>
-        </div>
-        <div class="modal-body">
-          
-          <h4>Trucking Invoice  Created Succefully</h4>
-     
-        </div>
-        <div class="modal-footer">
-          
-        </div>
-      </div>
-      
-    </div>
-  </div>
+
 
 <!-- Purchase Report End -->
 
@@ -651,10 +634,72 @@ textarea:focus, input:focus{
                 </div><!-- /.modal-dialog -->
 
             </div><!-- /.modal -->
+            <div class="modal fade" id="myModal1" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expenses - Trucking</h4>
+        </div>
+        <div class="modal-body" style="text-align:center;">
+          
+          <h4>Trucking Invoice Created Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+          <div id="myModal3" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your Invoice is not submitted. Would you like to submit or discard
+				</p>
+				<p class="text-warning">
+					<small>If you don't submit, your changes will not be saved.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<input type="submit" id="ok" class="btn btn-primary pull-left" value="Submit"/>
+                <button id="btdelete" type="button" class="btn btn-danger" onclick="discard()">DELETE</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>   
+<div class="modal fade" id="exampleModalLong" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expenses - Trucking</h4>
+        </div>
+        <div class="modal-body" id="bodyModal1" style="font-weight:bold;text-align:center;">
+          
+       
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
-            <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
-  
-
+  <input type="text" id="invoice_hdn"/> <input type="text" id="invoice_hdn1"/>
 <script type="text/javascript">
    // $('.select2-selection__arrow').click(function(){
     //    alert(3);
@@ -700,6 +745,8 @@ var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
     }
 }
 $( document ).ready(function() {
+    $('#final_submit').hide();
+$('#download').hide();
                         $('.hiden').css("display","none");
 
   
@@ -761,10 +808,152 @@ function(data) {
 
 
 });
+function discard(){
+   alert("clik");
+       
+   var dataString = {
+       dataString : $("#invoice_hdn").val()
+   
+  };
+  dataString[csrfName] = csrfHash;
+ 
+   $.ajax({
+       type:"POST",
+       dataType:"json",
+       url:"<?php echo base_url(); ?>Cpurchase/delete_trucking",
+       data:dataString,
 
+       success:function (data) {
+       console.log(data);
+       $('#myModal1').modal('show');
+       $('#final_submit').show();
+$('#download').show();
+   window.setTimeout(function(){
+       $('.modal').modal('hide');
+      
+$('.modal-backdrop').remove();
+},2500);
+
+          
+      }
+
+   });
+ 
+}
+     
+$('#insert_trucking').submit(function (event) {
+   
+       
+    var dataString = {
+        dataString : $("#insert_trucking").serialize()
+    
+   };
+   dataString[csrfName] = csrfHash;
   
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"<?php echo base_url(); ?>Cpurchase/insert_trucking",
+        data:$("#insert_trucking").serialize(),
 
+        success:function (data) {
+        console.log(data);
+        $('#myModal1').modal('show');
+        $('#final_submit').show();
+$('#download').show();
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+ },2500);
+
+            var split = data.split("/");
+            $('#invoice_hdn1').val(split[0]);
          
+     
+         $('#invoice_hdn').val(split[1]);
+       }
+
+    });
+    event.preventDefault();
+});
+$('#download').on('click', function (e) {
+var link=localStorage.getItem("truck");
+console.log(link);
+ var popout = window.open("<?php  echo base_url(); ?>Ccpurchase/trucking_details_data/"+$('#invoice_hdn1').val());
+ 
+    window.setTimeout(function(){
+         popout.close();
+   
+      }, 1500);
+      e.preventDefault();
+
+});  
+
+/*
+$('#add_purchase').on('click', function (e) {
+    var container_number = $('input[name=container_number]').val();
+    var shipment_bl_number = $('input[name=shipment_bl_number]').val();
+    var shipment_bl_number = $('input[name=bill_to]').val();
+    var shipment_bl_number = $('input[name=shipment_bl_number]').val();
+    var shipment_bl_number = $('input[name=shipment_bl_number]').val();
+
+    var proceed = true;
+    if (container_number==""){
+        $('input[name=container_number]').css({'border':'2px solid red'});
+        proceed = false;
+        }
+    if (shipment_bl_number==""){
+        $('input[name=shipment_bl_number]').css({'border':'2px solid red'});
+        proceed = false;
+        }
+    if(proceed == false){
+        $("#msg").append("<div class='alert alert-danger' role='alert'>U bent informatie vergeten in te vullen.</div>");    
+        setTimeout(function(){
+            $('.alert').fadeOut(400, function(){
+                $(this).remove();
+                })
+            ;},10000
+        );
+    }
+
+    if(proceed == true){
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+ },2500);
+
+$('#final_submit').show();
+$('#download').show();
+    }
+});
+*/
+$('#final_submit').on('click', function (e) {
+
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_trucking";
+      }, 2000);
+       
+});
+
+window.onbeforeunload = function(){
+    if(!window.btn_clicked){
+        
+        $('#myModal3').modal('show');
+        return 'Your Invoice is not submitted. Would you like to submit or discard';
+    }
+};
+ 
 </script>
 
 
@@ -776,18 +965,4 @@ display:none;
         display:none;
      }
     </style>
-<?php 
 
-    if(isset($_SESSION['expensetruckingid']))
-        { ?>
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-
-           $('#myModal1').modal('show');
-           hide();
-          
-        });
-    </script>
-    <?php } ?>

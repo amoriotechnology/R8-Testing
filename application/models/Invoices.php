@@ -4983,7 +4983,7 @@ return $output;
         $this->db->where('a.invoice_id', $invoice_id);
        
         $query = $this->db->get();
-echo $this->db->last_query();
+
 
             if ($query->num_rows() > 0) {
 

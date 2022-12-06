@@ -5,7 +5,22 @@
 
 <script src="<?php echo base_url()?>my-assets/js/admin_js/purchase.js" type="text/javascript"></script>
 
-
+<style>
+            input {
+    border: none;
+    background-color: #eee;
+ }
+textarea:focus, input:focus{
+   
+    outline: none;
+}
+ .text-right {
+    text-align: left; 
+}
+   .form-control{
+    padding: 0px;
+   }
+    </style>
 <!-- Add New Purchase Start -->
 <div class="content-wrapper">
     <section class="content-header">
@@ -24,23 +39,30 @@
     </section>
 
     <section class="content">
-        
-<style>
-            input {
-    border: none;
-    background-color: #eee;
- }
-textarea:focus, input:focus{
-   
-    outline: none;
-}
- .text-right {
-    text-align: left; 
-}
-   .form-control{
-    padding: 0px;
-   }
-    </style>
+        <!-- Alert Message -->
+        <?php
+            $message = $this->session->userdata('message');
+            if (isset($message)) {
+        ?>
+        <div class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <?php echo $message ?>                    
+        </div>
+        <?php 
+            $this->session->unset_userdata('message');
+            }
+            $error_message = $this->session->userdata('error_message');
+            if (isset($error_message)) {
+        ?>
+        <div class="alert alert-danger alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <?php echo $error_message ?>                    
+        </div>
+        <?php 
+            $this->session->unset_userdata('error_message');
+            }
+        ?>
+
         <!-- Purchase report -->
         <div class="row">
             <div class="col-sm-12">
@@ -52,8 +74,7 @@ textarea:focus, input:focus{
                     </div>
 
                     <div class="panel-body">
-                    <?php echo form_open_multipart('Cpurchase/insert_purchase_order',array('class' => 'form-vertical', 'id' => 'insert_purchase','name' => 'insert_purchase'))?>
-                        
+                    <form id="insert_purchase"  method="post">          
 
                         <div class="row">
                             <div class="col-sm-6">
@@ -297,6 +318,7 @@ textarea:focus, input:focus{
                             </div>
                         </div>
                         </div> -->
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 
 <br>
                         <div class="table-responsive">
@@ -457,17 +479,12 @@ textarea:focus, input:focus{
                          <div class="form-group row">
                             <div class="col-sm-6">
                                 <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-purchase-order" value="Save" />
-                                
-                                <?php 
-                                if(isset($_SESSION['purchase_orderid']))
-                                {
-                                    ?>
-                                 <a href="<?php echo base_url('Cpurchase/manage_purchase_order'); ?>" class='btn btn-primary' style='color: #fff;'>Submit</a>
-                                 <a class="btn btn-primary" style="color: #fff;" href="<?php echo base_url('Cpurchase/purchase_order_details_data/'); ?><?php echo $_SESSION['purchase_orderid']; ?> ">Download</a>
-                                 
-                                    <?php 
-                                }
-                                 ?>
+                            
+                                  
+                                <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+
+<a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
+                               
 
                             </div>
                             </div>
@@ -475,8 +492,8 @@ textarea:focus, input:focus{
 
 
 
-                    <?php echo form_close()?>
-                    </div>
+                            </form>  <input type="hidden" id="invoice_hdn"/> <input type="hidden" id="invoice_hdn1"/>
+                            </div>
                 </div>
 
             </div>
@@ -492,9 +509,9 @@ textarea:focus, input:focus{
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Purchase Order</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="font-weight:bold;text-align:center;">
           
-          <h4>Purchase order  Created Succefully</h4>
+          <h4>Purchase order Created Successfully</h4>
      
         </div>
         <div class="modal-footer">
@@ -505,11 +522,221 @@ textarea:focus, input:focus{
     </div>
   </div>
 
+  <div class="modal fade" id="myModal1" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expense - Purchase Order</h4>
+        </div>
+        <div class="modal-body" id="bodyModal1" style="font-weight:bold;text-align:center;">
+          
+        
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
-     <!------ add new product-->  
-     <div class="modal fade modal-success" id="product_info" role="dialog">
+  <div id="myModal3" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your Invoice is not submitted. Would you like to submit or discard
+				</p>
+				<p class="text-warning">
+					<small>If you don't save, your changes will not be saved.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary pull-left">Yes</button>
+				<button type="button" class="btn btn-primary pull-left">No</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>   
+           
+ 
 
-<div class="modal-dialog" role="document">
+
+<!-- Purchase Report End -->
+   <div class="modal fade modal-success" id="add_vendor" role="dialog">
+
+                <div class="modal-dialog" role="document">
+
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+
+                            <a href="#" class="close" data-dismiss="modal">&times;</a>
+
+                            <h3 class="modal-title">Add New Vendor</h3>
+
+                        </div>
+
+                        
+
+                        <div class="modal-body">
+
+                            <div id="customeMessage" class="alert hide"></div>
+
+                           
+
+                             <?php echo form_open_multipart('Csupplier/insert_supplier', array('id' => 'insert_supplier')) ?>
+
+
+                    <div class="panel-body">
+
+
+
+                        <div class="col-sm-6">
+
+                        <div class="form-group row">
+                            <label for="supplier_name" class="col-sm-4 col-form-label">Vendor Name<i class="text-danger">*</i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name ="supplier_name" id="supplier_name" type="text" placeholder="Vendor Name"  required="" tabindex="1">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="mobile" class="col-sm-4 col-form-label">Vendor Mobile<i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="mobile" id="mobile" type="number" placeholder="Vendor Mobile"  min="0" tabindex="2">
+                            </div>
+                        </div>
+                            <div class="form-group row">
+                            <label for="phone" class="col-sm-4 col-form-label"><?php echo display('phone') ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="phone" id="phone" type="number" placeholder="<?php echo display('phone') ?>"  min="0" tabindex="2">
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label for="email" class="col-sm-4 col-form-label"><?php echo display('email') ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="email" id="email" type="email" placeholder="<?php echo display('email') ?>"   tabindex="2">
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label for="emailaddress" class="col-sm-4 col-form-label"><?php echo display('email').' '.display('address'); ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="emailaddress" id="emailaddress" type="email" placeholder="<?php echo display('email').' '.display('address') ?>"  >
+                            </div>
+                        </div>
+
+                          <div class="form-group row">
+                            <label for="contact" class="col-sm-4 col-form-label"><?php echo display('contact'); ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="contact" id="contact" type="text" placeholder="<?php echo display('contact') ?>"  >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="fax" class="col-sm-4 col-form-label"><?php echo display('fax'); ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="fax" id="fax" type="text" placeholder="<?php echo display('fax') ?>"  >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="city" class="col-sm-4 col-form-label"><?php echo display('city'); ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="city" id="city" type="text" placeholder="<?php echo display('city') ?>"  >
+                            </div>
+                        </div>
+                         
+                    </div>
+                    <div class="col-sm-6">
+                    <div class="form-group row">
+                            <label for="state" class="col-sm-4 col-form-label"><?php echo display('state'); ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="state" id="state" type="text" placeholder="<?php echo display('state') ?>"  >
+                            </div>
+                        </div>
+                      
+                         
+                         <div class="form-group row">
+                            <label for="zip" class="col-sm-4 col-form-label"><?php echo display('zip'); ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="zip" id="zip" type="text" placeholder="<?php echo display('zip') ?>"  >
+                            </div>
+                        </div>
+                         <div class="form-group row">
+                            <label for="country" class="col-sm-4 col-form-label"><?php echo display('country') ?> <i class="text-danger"></i></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="country" id="country" type="text" placeholder="<?php echo display('country') ?>"  >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address " class="col-sm-4 col-form-label"><?php echo display('supplier_address') ?></label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="address" id="address " rows="2" placeholder="<?php echo display('supplier_address') ?>" ></textarea>
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="address2 " class="col-sm-4 col-form-label"><?php echo display('address') ?>2</label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="address2" id="address2" rows="2" placeholder="<?php echo display('supplier_address') ?>2" ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="details" class="col-sm-4 col-form-label"><?php echo display('supplier_details') ?></label>
+                            <div class="col-sm-8">
+                                <textarea class="form-control" name="details" id="details" rows="2" placeholder="<?php echo display('supplier_details') ?>" tabindex="4"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="previous_balance" class="col-sm-4 col-form-label"><?php echo display('previous_balance') ?></label>
+                            <div class="col-sm-8">
+                                <input class="form-control" name="previous_balance" id="previous_balance" type="text" min="0" placeholder="<?php echo display('previous_balance') ?>" tabindex="5">
+                            </div>
+                        </div>
+                    </div> 
+
+                    </div>
+
+                    
+
+                        </div>
+
+
+
+                        <div class="modal-footer">
+
+                            
+
+                            <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
+
+                            
+
+                            <input type="submit" id="add-supplier-from-expense" name="add-supplier-from-expense"  class="btn btn-success" value="Submit">
+
+                        </div>
+
+                        <?php echo form_close() ?>
+
+                    </div><!-- /.modal-content -->
+
+                </div><!-- /.modal-dialog -->
+
+            </div><!-- /.modal -->
+
+
+            <div class="modal fade" id="product_info" role="dialog">
+
+<div class="modal-dialog">
 
     <div class="modal-content">
 
@@ -743,172 +970,9 @@ textarea:focus, input:focus{
 </div><!-- /.modal -->
 
 
-
-<!-- Purchase Report End -->
-   <div class="modal fade modal-success" id="add_vendor" role="dialog">
-
-                <div class="modal-dialog" role="document">
-
-                    <div class="modal-content">
-
-                        <div class="modal-header">
-
-                            <a href="#" class="close" data-dismiss="modal">&times;</a>
-
-                            <h3 class="modal-title">Add New Vendor</h3>
-
-                        </div>
-
-                        
-
-                        <div class="modal-body">
-
-                            <div id="customeMessage" class="alert hide"></div>
-
-                           
-
-                             <?php echo form_open_multipart('Csupplier/insert_supplier', array('id' => 'insert_supplier')) ?>
-
-
-                    <div class="panel-body">
-
-
-
-                        <div class="col-sm-6">
-
-                        <div class="form-group row">
-                            <label for="supplier_name" class="col-sm-4 col-form-label">Vendor Name<i class="text-danger">*</i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name ="supplier_name" id="supplier_name" type="text" placeholder="Vendor Name"  required="" tabindex="1">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="mobile" class="col-sm-4 col-form-label">Vendor Mobile<i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="mobile" id="mobile" type="number" placeholder="Vendor Mobile"  min="0" tabindex="2">
-                            </div>
-                        </div>
-                            <div class="form-group row">
-                            <label for="phone" class="col-sm-4 col-form-label"><?php echo display('phone') ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="phone" id="phone" type="number" placeholder="<?php echo display('phone') ?>"  min="0" tabindex="2">
-                            </div>
-                        </div>
-                         <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label"><?php echo display('email') ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="email" id="email" type="email" placeholder="<?php echo display('email') ?>"   tabindex="2">
-                            </div>
-                        </div>
-                         <div class="form-group row">
-                            <label for="emailaddress" class="col-sm-4 col-form-label"><?php echo display('email').' '.display('address'); ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="emailaddress" id="emailaddress" type="email" placeholder="<?php echo display('email').' '.display('address') ?>"  >
-                            </div>
-                        </div>
-
-                          <div class="form-group row">
-                            <label for="contact" class="col-sm-4 col-form-label"><?php echo display('contact'); ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="contact" id="contact" type="text" placeholder="<?php echo display('contact') ?>"  >
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="fax" class="col-sm-4 col-form-label"><?php echo display('fax'); ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="fax" id="fax" type="text" placeholder="<?php echo display('fax') ?>"  >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="city" class="col-sm-4 col-form-label"><?php echo display('city'); ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="city" id="city" type="text" placeholder="<?php echo display('city') ?>"  >
-                            </div>
-                        </div>
-                         
-                    </div>
-                    <div class="col-sm-6">
-                    <div class="form-group row">
-                            <label for="state" class="col-sm-4 col-form-label"><?php echo display('state'); ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="state" id="state" type="text" placeholder="<?php echo display('state') ?>"  >
-                            </div>
-                        </div>
-                      
-                         
-                         <div class="form-group row">
-                            <label for="zip" class="col-sm-4 col-form-label"><?php echo display('zip'); ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="zip" id="zip" type="text" placeholder="<?php echo display('zip') ?>"  >
-                            </div>
-                        </div>
-                         <div class="form-group row">
-                            <label for="country" class="col-sm-4 col-form-label"><?php echo display('country') ?> <i class="text-danger"></i></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="country" id="country" type="text" placeholder="<?php echo display('country') ?>"  >
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="address " class="col-sm-4 col-form-label"><?php echo display('supplier_address') ?></label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="address" id="address " rows="2" placeholder="<?php echo display('supplier_address') ?>" ></textarea>
-                            </div>
-                        </div>
-
-                         <div class="form-group row">
-                            <label for="address2 " class="col-sm-4 col-form-label"><?php echo display('address') ?>2</label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="address2" id="address2" rows="2" placeholder="<?php echo display('supplier_address') ?>2" ></textarea>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="details" class="col-sm-4 col-form-label"><?php echo display('supplier_details') ?></label>
-                            <div class="col-sm-8">
-                                <textarea class="form-control" name="details" id="details" rows="2" placeholder="<?php echo display('supplier_details') ?>" tabindex="4"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="previous_balance" class="col-sm-4 col-form-label"><?php echo display('previous_balance') ?></label>
-                            <div class="col-sm-8">
-                                <input class="form-control" name="previous_balance" id="previous_balance" type="text" min="0" placeholder="<?php echo display('previous_balance') ?>" tabindex="5">
-                            </div>
-                        </div>
-                    </div> 
-
-                    </div>
-
-                    
-
-                        </div>
-
-
-
-                        <div class="modal-footer">
-
-                            
-
-                            <a href="#" class="btn btn-danger" data-dismiss="modal">Close</a>
-
-                            
-
-                            <input type="submit" id="add-supplier-from-expense" name="add-supplier-from-expense"  class="btn btn-success" value="Submit">
-
-                        </div>
-
-                        <?php echo form_close() ?>
-
-                    </div><!-- /.modal-content -->
-
-                </div><!-- /.modal-dialog -->
-
-            </div><!-- /.modal -->
-
 <!-- Purchase Report End -->
 <script>
+   
 var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
 var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
 var count = 2;
@@ -950,6 +1014,8 @@ function addPurchaseOrderField2(divName){
     }
 }
 $( document ).ready(function() {
+    $('#final_submit').hide();
+$('#download').hide();
                         $('.hiden').css("display","none");
 
   
@@ -1012,24 +1078,90 @@ function(data) {
 
 });
 
+$('#insert_purchase').submit(function (event) {
+    var dataString = {
+        dataString : $("#insert_purchase").serialize()
+    
+   };
+   dataString[csrfName] = csrfHash;
   
-  
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"<?php echo base_url(); ?>Cpurchase/insert_purchase_order",
+        data:$("#insert_purchase").serialize(),
 
-    </script>
-<?php 
-    if($_SESSION['purchase_orderid'])
-        { ?>
-
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-
-           $('#myModal1').modal('show');
-           hide();
-        });
-    </script>
-    <?php } ?>
-
-
-
+        success:function (data) {
+        console.log(data);
+   
+            var split = data.split("/");
+            $('#invoice_hdn1').val(split[0]);
          
+     
+            $('#invoice_hdn').val(split[1]);
+            $("#myModal1").find('.modal-body').text('Purchase Order Created Successfully');
+            $('#final_submit').show();
+$('#download').show();
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+$("#bodyModal1").html("");
+ },2500);
+
+
+       }
+
+    });
+    event.preventDefault();
+});
+$('#download').on('click', function (e) {
+
+ var popout = window.open("<?php  echo base_url(); ?>Cpurchase/purchase_order_details_data/"+$('#invoice_hdn1').val());
+ 
+    window.setTimeout(function(){
+         popout.close();
+        
+      }, 1500);
+      e.preventDefault();
+
+});  
+
+$('#final_submit').on('click', function (e) {
+
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No : "+$('#invoice_hdn').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#myModal1").find('.modal-body').text(input_hdn);
+   // $("#bodyModal1").html(input_hdn);
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+ },2500);
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_purchase_order";
+      }, 2500);
+       
+});
+
+window.onbeforeunload = function(){
+    if(!window.btn_clicked){
+        return 'Your Invoice is not submitted. Would you like to submit or discard';
+    }
+};
+  
+  
+
+    </script>
+
+
+
+
+
+

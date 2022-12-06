@@ -61,8 +61,7 @@
                     </div>
 
                     <div class="panel-body">
-                    <?php echo form_open_multipart('Cpurchase/insert_packing_list',array('class' => 'form-vertical', 'id' => 'insert_packing_list','name' => 'insert_packing_list'))?>
-                        
+                    <form id="insert_purchase"  method="post">               
 
                         <div class="row">
 
@@ -121,6 +120,7 @@
                                 </div> 
                             </div>
                         </div>
+                        <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>">
 
            <!--      <div>
                           <button type="button" class="btn btn-primary"  id="service_quotation_div">Create Crate</button>  
@@ -350,20 +350,14 @@
 <div class="form-group row">
                             <div class="col-sm-6">
                                 <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-packing-list" value="Save" />
-                               <?php 
-                               if(isset($_SESSION['expense_packing_id']))
-                               {
-                                ?>
-                                <a style="color:#fff" href="<?php echo base_url('Cpurchase/manage_packing_list'); ?>" class="btn btn-primary">
-                                    Submit
-                                </a>
-                                <a style="color:#fff" href="<?php echo base_url('Cpurchase/packing_list_details_data'); ?>" class="btn btn-primary">
-                                    Download
-                                </a>
-                            <?php }  ?>
+                              
+                                <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+
+<a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
+                   
                             </div>
                         </div>
-                    <?php echo form_close()?>
+                        </form>  <input type="hidden" id="invoice_hdn"/> <input type="hidden" id="invoice_hdn1"/>
                     </div>
                 </div>
 
@@ -377,11 +371,54 @@
       <div class="modal-content" style="    margin-top: 190px;">
         <div class="modal-header" style="">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Pruchase Packing List</h4>
+          <h4 class="modal-title">Expenses - PackingList</h4>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="font-weight:bold;text-align:center;">
           
-          <h4>Packing    Invoice  Created Succefully</h4>
+          <h4>PackingList Created Successfully</h4>
+     
+        </div>
+        <div class="modal-footer">
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>
+          <div id="myModal3" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your Packing List is not submitted. Would you like to submit or discard
+				</p>
+				<p class="text-warning">
+					<small>If you don't save, your changes will not be saved.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary pull-left">Yes</button>
+				<button type="button" class="btn btn-primary pull-left">No</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>   
+<div class="modal fade" id="exampleModalLong" role="dialog" >
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content" style="    margin-top: 190px;">
+        <div class="modal-header" style="">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Expenses - PackingList</h4>
+        </div>
+        <div class="modal-body" id="bodyModal1" style="font-weight:bold;text-align:center;">
+          
+       
      
         </div>
         <div class="modal-footer">
@@ -392,27 +429,22 @@
     </div>
   </div>
 
-</div>
-<!-- Purchase Report End -->
 
 
 
-
-
-<?php 
-
-    if($_SESSION['expense_packing_id'])
-        { ?>
 
     <script type="text/javascript">
+        var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
+var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
         $(document).ready(function(){
+            $('#final_submit').hide();
+$('#download').hide();
 
-
-           $('#myModal1').modal('show');
-           hide();
+       //    $('#myModal1').modal('show');
+       //    hide();
         });
     </script>
-    <?php } ?>
+   
 
 <script type="text/javascript">
 
@@ -471,7 +503,85 @@ $(document).ready(function(){
 
   
 });
+
+$('#insert_purchase').submit(function (event) {
+    var dataString = {
+        dataString : $("#insert_purchase").serialize()
     
+   };
+   dataString[csrfName] = csrfHash;
+  
+    $.ajax({
+        type:"POST",
+        dataType:"json",
+        url:"<?php echo base_url(); ?>Cpurchase/insert_packing_list",
+        data:$("#insert_purchase").serialize(),
+
+        success:function (data) {
+        console.log(data);
+   
+            var split = data.split("/");
+            $('#invoice_hdn1').val(split[0]);
+         
+     
+            $('#invoice_hdn').val(split[1]);
+            $("#myModal1").find('.modal-body').text('Packing List Created Successfully');
+            $('#final_submit').show();
+$('#download').show();
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+$("#bodyModal1").html("");
+ },2500);
+
+
+       }
+
+    });
+
+    event.preventDefault();
+});
+$('#download').on('click', function (e) {
+
+ var popout = window.open("<?php  echo base_url(); ?>Cpurchase/packing_list_details_data/"+$('#invoice_hdn1').val());
+ 
+    window.setTimeout(function(){
+         popout.close();
+        
+      }, 1500);
+      e.preventDefault();
+
+});  
+
+$('#final_submit').on('click', function (e) {
+
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Packing List No :"+$('#invoice_hdn').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#myModal1").find('.modal-body').text(input_hdn);
+   // $("#bodyModal1").html(input_hdn);
+    $('#myModal1').modal('show');
+    window.setTimeout(function(){
+        $('.modal').modal('hide');
+       
+$('.modal-backdrop').remove();
+ },2500);
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_packing_list";
+      }, 2500);
+       
+});
+
+window.onbeforeunload = function(){
+    if(!window.btn_clicked){
+        return 'Your Invoice is not submitted. Would you like to submit or discard';
+    }
+};
 
 
 </script>
