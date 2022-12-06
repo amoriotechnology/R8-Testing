@@ -430,7 +430,7 @@ textarea:focus, input:focus{
                                         <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-trucking"  value="<?php echo display('Save') ?>" />
 
                                   
-                                            <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+                                            <a  style="color: #fff;"  id="final_submit" class='final_submit btn btn-primary'>Submit</a>
 
                                               <a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
                                     </td>
@@ -670,9 +670,9 @@ textarea:focus, input:focus{
 				</p>
 			</div>
 			<div class="modal-footer">
-				<input type="submit" id="ok" class="btn btn-primary pull-left" value="Submit"/>
-                <button id="btdelete" type="button" class="btn btn-danger" onclick="discard()">DELETE</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<input type="submit" id="ok" class="btn btn-primary pull-left final_submit" onclick="submit_redirect()"  value="Submit"/>
+                <button id="btdelete" type="button" class="btn btn-danger pull-left" onclick="discard()">Discard</button>
+			
 			</div>
 		</div>
 	</div>
@@ -809,38 +809,39 @@ function(data) {
 
 });
 function discard(){
-   alert("clik");
+   $.get(
+    "<?php echo base_url(); ?>Cpurchase/delete_trucking/", 
+   { val: $("#invoice_hdn1").val(), csrfName:csrfHash }, // put your parameters here
+   function(responseText){
+    console.log(responseText);
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been Discared";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
        
-   var dataString = {
-       dataString : $("#invoice_hdn").val()
-   
-  };
-  dataString[csrfName] = csrfHash;
- 
-   $.ajax({
-       type:"POST",
-       dataType:"json",
-       url:"<?php echo base_url(); ?>Cpurchase/delete_trucking",
-       data:dataString,
 
-       success:function (data) {
-       console.log(data);
-       $('#myModal1').modal('show');
-       $('#final_submit').show();
-$('#download').show();
-   window.setTimeout(function(){
-       $('.modal').modal('hide');
-      
-$('.modal-backdrop').remove();
-},2500);
-
-          
-      }
-
-   });
- 
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_trucking";
+      }, 2000);
+   }
+); 
 }
-     
+     function submit_redirect(){
+        window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_trucking";
+      }, 2000);
+     }
+
 $('#insert_trucking').submit(function (event) {
    
        
@@ -890,47 +891,8 @@ console.log(link);
 
 });  
 
-/*
-$('#add_purchase').on('click', function (e) {
-    var container_number = $('input[name=container_number]').val();
-    var shipment_bl_number = $('input[name=shipment_bl_number]').val();
-    var shipment_bl_number = $('input[name=bill_to]').val();
-    var shipment_bl_number = $('input[name=shipment_bl_number]').val();
-    var shipment_bl_number = $('input[name=shipment_bl_number]').val();
 
-    var proceed = true;
-    if (container_number==""){
-        $('input[name=container_number]').css({'border':'2px solid red'});
-        proceed = false;
-        }
-    if (shipment_bl_number==""){
-        $('input[name=shipment_bl_number]').css({'border':'2px solid red'});
-        proceed = false;
-        }
-    if(proceed == false){
-        $("#msg").append("<div class='alert alert-danger' role='alert'>U bent informatie vergeten in te vullen.</div>");    
-        setTimeout(function(){
-            $('.alert').fadeOut(400, function(){
-                $(this).remove();
-                })
-            ;},10000
-        );
-    }
-
-    if(proceed == true){
-    $('#myModal1').modal('show');
-    window.setTimeout(function(){
-        $('.modal').modal('hide');
-       
-$('.modal-backdrop').remove();
- },2500);
-
-$('#final_submit').show();
-$('#download').show();
-    }
-});
-*/
-$('#final_submit').on('click', function (e) {
+$('.final_submit').on('click', function (e) {
 
     window.btn_clicked = true;      //set btn_clicked to true
     var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been saved Successfully";
@@ -948,9 +910,9 @@ $('#final_submit').on('click', function (e) {
 
 window.onbeforeunload = function(){
     if(!window.btn_clicked){
-        
+       // window.btn_clicked = true; 
         $('#myModal3').modal('show');
-        return 'Your Invoice is not submitted. Would you like to submit or discard';
+       return false;
     }
 };
  

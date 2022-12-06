@@ -374,8 +374,8 @@
                                 <input type="submit" id="add_purchase"  class="btn btn-primary btn-large" name="add-ocean-import" value="<?php echo display('save') ?>" />
                                 
 
-                             
-                                <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+                                <a  style="color: #fff;"  id="final_submit" class='final_submit btn btn-primary'>Submit</a>
+                           
 
 <a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
                             </div>
@@ -609,7 +609,27 @@
       
     </div>
   </div>
-
+  <div id="myModal3" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your Packing List is not submitted. Would you like to submit or discard
+				</p>
+				<p class="text-warning">
+					<small>If you don't save, your changes will not be saved.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+            <input type="submit" id="ok" class="btn btn-primary pull-left final_submit" onclick="submit_redirect()"  value="Submit"/>
+                <button id="btdelete" type="button" class="btn btn-danger pull-left" onclick="discard()">Discard</button>
+			</div>
+		</div>
+	</div>
+</div>   
 
 <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
 
@@ -681,6 +701,41 @@ $('.modal-backdrop').remove();
 $('#final_submit').show();
 $('#download').show();
 });
+function discard(){
+   $.get(
+    "<?php echo base_url(); ?>Cpurchase/delete_ocean_import/", 
+   { val: $("#invoice_hdn1").val(), csrfName:csrfHash }, // put your parameters here
+   function(responseText){
+    console.log(responseText);
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Booking No :"+$('#invoice_hdn1').val()+" has been Discarded";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_ocean_import_tracking";
+      }, 2000);
+   }
+); 
+}
+     function submit_redirect(){
+        window.btn_clicked = true;      //set btn_clicked to true
+        var input_hdn="Your Booking List No :"+$('#invoice_hdn1').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_ocean_import_tracking";
+      }, 2000);
+     }
+
+
 $('#final_submit').on('click', function (e) {
 
     window.btn_clicked = true;      //set btn_clicked to true
@@ -692,15 +747,17 @@ $('#final_submit').on('click', function (e) {
   window.setTimeout(function(){
        
 
-        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_trucking";
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_ocean_import_tracking";
       }, 2000);
        
 });
 
 window.onbeforeunload = function(){
     if(!window.btn_clicked){
-        return 'Your Invoice is not submitted. Would you like to submit or discard';
+       // window.btn_clicked = true; 
+        $('#myModal3').modal('show');
+       return false;
     }
-};
+}
     </script>
  

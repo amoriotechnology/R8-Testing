@@ -322,7 +322,7 @@
                             <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-trucking"  value="<?php echo display('Save') ?>" />
 
                                   
-<a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+                            <a  style="color: #fff;"  id="final_submit" class='final_submit btn btn-primary'>Submit</a>
 
   <a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
 
@@ -387,9 +387,8 @@
 				</p>
 			</div>
 			<div class="modal-footer">
-				<input type="submit" id="ok" class="btn btn-primary pull-left" value="Submit"/>
-                <button id="btdelete" type="button" class="btn btn-danger" onclick="discard();">DELETE</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" id="ok" class="btn btn-primary pull-left final_submit" onclick="submit_redirect()"  value="Submit"/>
+                <button id="btdelete" type="button" class="btn btn-danger pull-left" onclick="discard()">Discard</button>
 			</div>
 		</div>
 	</div>
@@ -425,6 +424,39 @@ $( document ).ready(function() {
     $('#final_submit').hide();
 $('#download').hide();
 });
+function discard(){
+   $.get(
+    "<?php echo base_url(); ?>Cpurchase/delete_trucking/", 
+   { val: $("#invoice_hdn1").val(), csrfName:csrfHash }, // put your parameters here
+   function(responseText){
+    console.log(responseText);
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been Discared";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_trucking";
+      }, 2000);
+   }
+); 
+}
+     function submit_redirect(){
+        window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Ccpurchase/manage_trucking";
+      }, 2000);
+     }
 $('#insert_trucking').submit(function (event) {
    
        
@@ -473,10 +505,10 @@ var popout = window.open("<?php  echo base_url(); ?>Ccpurchase/trucking_details_
      e.preventDefault();
 
 });  
-$('#final_submit').on('click', function (e) {
+$('.final_submit').on('click', function (e) {
 
 window.btn_clicked = true;      //set btn_clicked to true
-var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been Updated Successfully";
+var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been saved Successfully";
 
 console.log(input_hdn);
 $("#bodyModal1").html(input_hdn);
@@ -491,9 +523,9 @@ window.setTimeout(function(){
 
 window.onbeforeunload = function(){
 if(!window.btn_clicked){
-    
+   // window.btn_clicked = true; 
     $('#myModal3').modal('show');
-    return 'Your Invoice is not submitted. Would you like to submit or discard';
+   return false;
 }
 };
 </script>

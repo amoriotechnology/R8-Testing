@@ -517,7 +517,7 @@
                             <div class="col-sm-6">
 
                             <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-purchase" value="Save" />
-                                <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+                            <a  style="color: #fff;"  id="final_submit" class='final_submit btn btn-primary'>Submit</a>
 
 <a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
                             </div>
@@ -598,9 +598,8 @@
 				</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary pull-left">Yes</button>
-				<button type="button" class="btn btn-primary pull-left">No</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <input type="submit" id="ok" class="btn btn-primary pull-left final_submit" onclick="submit_redirect()"  value="Submit"/>
+                <button id="btdelete" type="button" class="btn btn-danger pull-left" onclick="discard()">Discard</button>
 			</div>
 		</div>
 	</div>
@@ -919,7 +918,40 @@ $('#download').on('click', function (e) {
 
 });  
 
-$('#final_submit').on('click', function (e) {
+function discard(){
+   $.get(
+    "<?php echo base_url(); ?>Cpurchase/deletepurchase/", 
+   { val: $("#invoice_hdn1").val(), csrfName:csrfHash }, // put your parameters here
+   function(responseText){
+    console.log(responseText);
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been Discarded";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_purchase";
+      }, 2000);
+   }
+); 
+}
+     function submit_redirect(){
+        window.btn_clicked = true;      //set btn_clicked to true
+        var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_purchase";
+      }, 2000);
+     }
+$('.final_submit').on('click', function (e) {
 
     window.btn_clicked = true;      //set btn_clicked to true
     var input_hdn="Your Invoice No : "+$('#invoice_hdn').val()+" has been saved Successfully";
@@ -943,10 +975,11 @@ $('.modal-backdrop').remove();
 
 window.onbeforeunload = function(){
     if(!window.btn_clicked){
-        return 'Your Invoice is not submitted. Would you like to submit or discard';
+       // window.btn_clicked = true; 
+        $('#myModal3').modal('show');
+       return false;
     }
-};
-
+}
   </script>
 
   <script type="text/javascript">

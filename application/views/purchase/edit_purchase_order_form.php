@@ -440,9 +440,9 @@
                          <div class="form-group row">
                             <div class="col-sm-6">
                                 <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-purchase-order" value="Save" />
-                            
+                                <a  style="color: #fff;"  id="final_submit" class='final_submit btn btn-primary'>Submit</a>
                                   
-                                <a  style="color: #fff;"  id="final_submit" class='btn btn-primary'>Submit</a>
+                               
 
 <a id="download" style="color: #fff;" class='btn btn-primary'>Download</a>
                                
@@ -508,7 +508,27 @@
     </div>
   </div>
 
-
+  <div id="myModal3" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Your Invoice is not submitted. Would you like to submit or discard
+				</p>
+				<p class="text-warning">
+					<small>If you don't save, your changes will not be saved.</small>
+				</p>
+			</div>
+			<div class="modal-footer">
+            <input type="submit" id="ok" class="btn btn-primary pull-left final_submit" onclick="submit_redirect()"  value="Submit"/>
+                <button id="btdelete" type="button" class="btn btn-danger pull-left" onclick="discard()">Discard</button>
+			</div>
+		</div>
+	</div>
+</div> 
            
  
 
@@ -652,8 +672,40 @@ $('#download').on('click', function (e) {
       e.preventDefault();
 
 });  
+function discard(){
+   $.get(
+    "<?php echo base_url(); ?>Cpurchase/deletepurchaseorder/", 
+   { val: $("#invoice_hdn1").val(), csrfName:csrfHash }, // put your parameters here
+   function(responseText){
+    console.log(responseText);
+    window.btn_clicked = true;      //set btn_clicked to true
+    var input_hdn="Your Packing List No :"+$('#invoice_hdn').val()+" has been Discarded";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
 
-$('#final_submit').on('click', function (e) {
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_purchase_order";
+      }, 2000);
+   }
+); 
+}
+     function submit_redirect(){
+        window.btn_clicked = true;      //set btn_clicked to true
+        var input_hdn="Your Packing List No :"+$('#invoice_hdn').val()+" has been saved Successfully";
+  
+    console.log(input_hdn);
+    $("#bodyModal1").html(input_hdn);
+        $('#exampleModalLong').modal('show');
+    window.setTimeout(function(){
+       
+
+        window.location = "<?php  echo base_url(); ?>Cpurchase/manage_purchase_order";
+      }, 2000);
+     }
+$('.final_submit').on('click', function (e) {
 
     window.btn_clicked = true;      //set btn_clicked to true
     var input_hdn="Your Invoice No : "+$('#invoice_hdn').val()+" has been Updated Successfully";
@@ -677,10 +729,11 @@ $('.modal-backdrop').remove();
 
 window.onbeforeunload = function(){
     if(!window.btn_clicked){
-        return 'Your Invoice is not submitted. Would you like to submit or discard';
+       // window.btn_clicked = true; 
+        $('#myModal3').modal('show');
+       return false;
     }
-};
-  
+}
   
 
     </script>

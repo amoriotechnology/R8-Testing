@@ -618,13 +618,38 @@ $data=array(
 
 
     public function delete_trucking() {
-        $delvalue = $this->input->post('dataString',TRUE);
-        $this->db->where('trucking_id', $dataString);
+        $this->db->where('trucking_id', $_GET['val']);
         $this->db->delete('expense_trucking');
-        echo $this->db->last_query();
-    }
+        $this->db->where('expense_trucking_id', $_GET['val']);
+        $this->db->delete('expense_trucking_details');
+    
+      redirect("Cpurchase/manage_purchase");
+   }
+   public function delete_packing() {
+    $this->db->where('expense_packing_id', $_GET['val']);
+    $this->db->delete('expense_packing_list');
+    $this->db->where('expense_packing_id', $_GET['val']);
+    $this->db->delete('expense_packing_list_detail');
 
-
+ // redirect("Cpurchase/manage_purchase");
+}
+public function delete_ocean_import(){
+    $this->db->where('booking_no', $_GET['val']);
+    $this->db->delete('ocean_import_tracking');
+   
+}
+public function deletepurchaseorder(){
+    $this->db->where('purchase_order_id', $_GET['val']);
+    $this->db->delete('purchase_order');
+    $this->db->where('purchase_id', $_GET['val']);
+    $this->db->delete('purchase_order_details');
+}
+public function deletepurchase(){
+    $this->db->where('purchase_id', $_GET['val']);
+    $this->db->delete('product_purchase');
+    $this->db->where('purchase_id', $_GET['val']);
+    $this->db->delete('product_purchase_details');
+}
     public function delete_purchase($purchase_id = null) {
         $this->load->model('Purchases');
         if ($this->Purchases->purchase_delete($purchase_id)) {
