@@ -492,7 +492,7 @@ textarea:focus, input:focus{
 
 
 
-                            </form>  <input type="text" id="invoice_hdn"/> <input type="text" id="invoice_hdn1"/>
+                            </form>  <input type="hidden" id="invoice_hdn"/> <input type="hidden" id="invoice_hdn1"/>
                             </div>
                 </div>
 
@@ -500,10 +500,11 @@ textarea:focus, input:focus{
         </div>
     </section>
 </div>
+<!--
 <div class="modal fade" id="myModal1" role="dialog" >
     <div class="modal-dialog">
     
-      <!-- Modal content-->
+     // Modal content
       <div class="modal-content" style="    margin-top: 190px;">
         <div class="modal-header" style="">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -520,7 +521,7 @@ textarea:focus, input:focus{
       </div>
       
     </div>
-  </div>
+  </div>-->
 
   <div class="modal fade" id="myModal1" role="dialog" >
     <div class="modal-dialog">
@@ -1013,14 +1014,11 @@ function addPurchaseOrderField2(divName){
     }
 }
 $( document ).ready(function() {
-<<<<<<< HEAD
+
     $('#final_submit').hide();
 $('#download').hide();
                         $('.hiden').css("display","none");
-=======
 
-    $('.hiden').css("display","none");
->>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
 
   
 
@@ -1082,7 +1080,7 @@ function(data) {
 
 });
 
-<<<<<<< HEAD
+
 $('#insert_purchase').submit(function (event) {
     var dataString = {
         dataString : $("#insert_purchase").serialize()
@@ -1143,8 +1141,9 @@ function discard(){
     var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been Discarded";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
-        $('#exampleModalLong').modal('show');
+        $('#myModal1').modal('show');
     window.setTimeout(function(){
        
 
@@ -1159,12 +1158,12 @@ function discard(){
   
     console.log(input_hdn);
     $("#bodyModal1").html(input_hdn);
-        $('#exampleModalLong').modal('show');
+        $('#myModal1').modal('show');
     window.setTimeout(function(){
        
 
         window.location = "<?php  echo base_url(); ?>Cpurchase/manage_purchase_order";
-      }, 2000);
+      }, 2500);
      }
 $('.final_submit').on('click', function (e) {
 
@@ -1195,9 +1194,7 @@ window.onbeforeunload = function(){
        return false;
     }
 }
-=======
 
->>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
   
 
     </script>

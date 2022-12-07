@@ -464,27 +464,7 @@
     </section>
 
 </div>
-<div class="modal fade" id="myModal1" role="dialog" >
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content" style="    margin-top: 190px;">
-        <div class="modal-header" style="">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Expense - Purchase Order</h4>
-        </div>
-        <div class="modal-body" style="text-align:center;font-weight:bold;">
-          
-          <h4>Purchase order Updated Successfully</h4>
-     
-        </div>
-        <div class="modal-footer">
-          
-        </div>
-      </div>
-      
-    </div>
-  </div>
+
 
   <div class="modal fade" id="myModal1" role="dialog" >
     <div class="modal-dialog">
@@ -682,8 +662,9 @@ function discard(){
     var input_hdn="Your Packing List No :"+$('#invoice_hdn').val()+" has been Discarded";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
-        $('#exampleModalLong').modal('show');
+        $('#myModal1').modal('show');
     window.setTimeout(function(){
        
 
@@ -697,8 +678,9 @@ function discard(){
         var input_hdn="Your Packing List No :"+$('#invoice_hdn').val()+" has been saved Successfully";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
-        $('#exampleModalLong').modal('show');
+        $('#myModal1').modal('show');
     window.setTimeout(function(){
        
 

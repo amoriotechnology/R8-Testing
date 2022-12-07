@@ -1439,6 +1439,7 @@ $('#download').on('click', function (e) {
 });  
 
 function discard(){
+
    $.get(
     "<?php echo base_url(); ?>Cpurchase/deletepurchase/", 
    { val: $("#invoice_hdn1").val(), csrfName:csrfHash }, // put your parameters here
@@ -1448,6 +1449,7 @@ function discard(){
     var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been Discarded";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
         $('#exampleModalLong').modal('show');
     window.setTimeout(function(){
@@ -1508,7 +1510,7 @@ window.onbeforeunload = function(){
  //   });
 </script>
 
-<<<<<<< HEAD
+
     
     
     <script>
@@ -1517,17 +1519,4 @@ $('#productname').on('change', function() {
   $('#productid').val(val);
 });
     </script>
-=======
-    if(isset($_SESSION['newexpenseid']))
-        { ?>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-
-
-           $('#myModal1').modal('show');
-           hide();
-        });
-    </script>
-    <?php } ?>
->>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51

@@ -525,6 +525,7 @@ function discard(){
     var input_hdn="Your Booking No :"+$('#invoice_hdn1').val()+" has been Discarded";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
         $('#exampleModalLong').modal('show');
     window.setTimeout(function(){

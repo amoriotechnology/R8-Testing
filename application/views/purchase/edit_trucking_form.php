@@ -434,6 +434,7 @@ function discard(){
     var input_hdn="Your Invoice No :"+$('#invoice_hdn').val()+" has been Discared";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
         $('#exampleModalLong').modal('show');
     window.setTimeout(function(){

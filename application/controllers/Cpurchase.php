@@ -474,12 +474,12 @@ $CI = & get_instance();
         $list[''] = '';
         foreach ($product_info as $value) {
             $json_product[] = array('label'=>$value['product_name'].'('.$value['product_model'].')','value'=>$value['product_id']);
-<<<<<<< HEAD
+
            
         } 
-=======
-        }
->>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
+
+        
+
     }else{
         $json_product[] = 'No Product Found';
         }

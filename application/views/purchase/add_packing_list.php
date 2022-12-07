@@ -432,15 +432,7 @@
 
 
 
-<<<<<<< HEAD
-=======
 
-<!-- <?php 
-
-    if($_SESSION['expense_packing_id'])
-        { ?>
-
->>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
     <script type="text/javascript">
         var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
 var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
@@ -452,11 +444,7 @@ $('#download').hide();
        //    hide();
         });
     </script>
-<<<<<<< HEAD
-   
-=======
-    <?php } ?> -->
->>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
+
 
 <script type="text/javascript">
 
@@ -576,6 +564,7 @@ function discard(){
     var input_hdn="Your Packing List No :"+$('#invoice_hdn').val()+" has been Discarded";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
         $('#exampleModalLong').modal('show');
     window.setTimeout(function(){
