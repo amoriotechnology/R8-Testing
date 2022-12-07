@@ -547,13 +547,14 @@ class Linvoice {
     public function trucking_edit_data($purchase_id) {
 
         $CI = & get_instance();
-
+       
         $CI->load->model('Invoices');
 
         $CI->load->model('Suppliers');
-
+        $CI->load->model('Ppurchases');
+        
         $CI->load->model('Web_settings');
-
+        $CI->load->model('Accounts_model');
          //$bank_list        = $CI->Web_settings->bank_list();
 
         $purchase_detail = $CI->Invoices->retrieve_trucking_editdata($purchase_id);
@@ -583,13 +584,28 @@ class Linvoice {
 
         }
 
-
-
         $currency_details = $CI->Web_settings->retrieve_setting_editdata();
+        $curn_info_default = $CI->db->select('*')->from('currency_tbl')->where('icon',$currency_details[0]['currency'])->get()->result_array();
+      
+        $taxfield = $CI->db->select('tax_name,default_value')->from('tax_settings')->get()->result_array();
+        $taxfield1 = $CI->db->select('tax_id,tax')
+        ->from('tax_information')
+        ->get()
+        ->result_array();
+        $get_customer= $CI->Accounts_model->get_customer();
+        $all_supplier = $CI->Ppurchases->select_all_supplier_trucker();
+
+
+       
 
         $data = array(
+            'all_supplier'  => $all_supplier,
+            'curn_info_default' =>$curn_info_default[0]['currency_name'],
+            'currency'  =>$currency_details[0]['currency'],
 
             'title'         => 'Edit Trucking Invoice',
+            'taxes'         => $taxfield,
+            'tax'         => $taxfield1,
 
             'trucking_id'   => $purchase_detail[0]['trucking_id'],
 
@@ -611,10 +627,10 @@ class Linvoice {
 
             'total'         => number_format($purchase_detail[0]['grand_total_amount'] + (!empty($purchase_detail[0]['total_discount'])?$purchase_detail[0]['total_discount']:0),2),
 
-         
+            'customer_list' => $get_customer
 
         );
-
+print_r($purchase_detail);
 
 
         $chapterList = $CI->parser->parse('invoice/edit_trucking_form', $data, true);

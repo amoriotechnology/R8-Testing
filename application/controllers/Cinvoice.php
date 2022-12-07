@@ -481,16 +481,7 @@ echo json_encode($data);
          $CI->load->model('Invoices');
         $invoiceid=$CI->Invoices->trucking_entry();
 
-        $this->session->set_userdata(array('truckid' => $invoiceid));
-        if (isset($_POST['add-trucking'])) {
-          //  print_r($_POST['add-trucking']);
-            redirect(base_url('Cinvoice/trucking'));
-            exit;
-        } elseif (isset($_POST['add-trucking-another'])) {
-           // print_r($_POST['add-trucking-another']);
-            redirect(base_url('Cinvoice/trucking'));
-            exit;
-        }
+       
     }
 
  

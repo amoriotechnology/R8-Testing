@@ -164,7 +164,7 @@ $pdf->Output($file_location.$file_name, 'F'); // F means upload PDF file on some
 	$mail->From = "mail@shinerweb.com";
 	$mail->FromName = "Shinerweb Technologies";
 	$mail->IsHTML(true);
-	$mail->AddAddress('rammg1985@gmail.com'); // To mail id
+	$mail->AddAddress('Suryakala@amoriotech.com'); // To mail id
 	//$mail->AddCC('info.shinerweb@gmail.com'); // Cc mail id
 	//$mail->AddBCC('info.shinerweb@gmail.com'); // Bcc mail id
 

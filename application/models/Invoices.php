@@ -4798,7 +4798,7 @@ return $output;
 
 
       $trucking_date = $this->input->post('trucking_date',TRUE);
-        
+      $invoice_no= $this->input->post('invoice_no',TRUE);
 
 
         $p_id = $this->input->post('product_id',TRUE);
@@ -4840,12 +4840,28 @@ return $output;
          
         );
 
-
-
-      // new end
-
-
+        $purchase_id_1 = $this->db->where('invoice_no',$this->input->post('invoice_no',TRUE));
+        $q=$this->db->get('sale_trucking');
+        $row = $q->row_array();
+    if(!empty($row['trucking_id'])){
+        $this->session->set_userdata("sale_trucking_1",$row['trucking_id']);
+      
+        $this->db->where('invoice_no',$this->input->post('invoice_no',TRUE));
+ 
+        $this->db->delete('sale_trucking');
+        echo $this->db->last_query();echo "<br/>";
         $this->db->insert('sale_trucking', $data);
+        echo $this->db->last_query();echo "<br/>";
+   }   
+    else{
+    $this->db->insert('sale_trucking', $data);
+    echo $this->db->last_query();echo "<br/>";
+    }
+       $purchase_id = $this->db->select('trucking_id')->from('sale_trucking')->where('invoice_no',$this->input->post('invoice_no',TRUE))->get()->row()->trucking_id;
+       echo  $purchase_id;
+       $this->session->set_userdata("sale_trucking_2",$purchase_id);
+
+    
        /* if($this->input->post('paytype') == 2){
           if(!empty($paid_amount)){
             $this->db->insert('acc_transaction',$bankc);
@@ -4879,7 +4895,7 @@ return $output;
                 $total =  $t_price[$i];
                 $data1 = array(
                     'sale_trucking_detail_id' => $this->generator(15),
-                    'sale_trucking_id'        => $purchase_id,
+                    'sale_trucking_id'        =>  $this->session->userdata("sale_trucking_2"),
                     'trucking_date' =>$trucking_date,
                    
                     'qty'           => $product_quantity,
@@ -4891,9 +4907,12 @@ return $output;
                     'create_by'          =>  $this->session->userdata('user_id'),
                     'status'             => 1
                 );
-              
-          //  if (!empty($quantity)) {
+                $this->db->where('sale_trucking_id', $this->session->userdata("sale_trucking_1"));
+                $this->db->delete('sale_trucking_details');
+  
                 $this->db->insert('sale_trucking_details', $data1);
+          //  if (!empty($quantity)) {
+              
           //  }
    
     }
@@ -4903,7 +4922,7 @@ return $output;
 
 
 
-        return $purchase_id;
+    return $purchase_id."/".$invoice_no;
     }
 
 
