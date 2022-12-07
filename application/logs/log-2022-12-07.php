@@ -18867,3 +18867,508 @@ INFO - 2022-12-07 12:29:13 --> File loaded: D:\wamp\www\R8-Testing\application\v
 INFO - 2022-12-07 12:29:13 --> File loaded: D:\wamp\www\R8-Testing\application\views\admin_html_template.php
 INFO - 2022-12-07 12:29:13 --> Final output sent to browser
 DEBUG - 2022-12-07 12:29:13 --> Total execution time: 0.3144
+ERROR - 2022-12-07 07:46:07 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:07 --> Config Class Initialized
+INFO - 2022-12-07 07:46:07 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:07 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:07 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:07 --> URI Class Initialized
+INFO - 2022-12-07 07:46:07 --> Router Class Initialized
+INFO - 2022-12-07 07:46:07 --> Output Class Initialized
+INFO - 2022-12-07 07:46:07 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:07 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:07 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:07 --> Input Class Initialized
+INFO - 2022-12-07 07:46:07 --> Language Class Initialized
+INFO - 2022-12-07 07:46:07 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:07 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:07 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:07 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:07 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:07 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:07 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:07 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:07 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:07 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:07 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:07 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:07 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:46:07 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:46:07 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:46:07 --> Model "Categories" initialized
+INFO - 2022-12-07 07:46:07 --> Model "Units" initialized
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Undefined variable: expense D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Trying to access array offset on value of type null D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:46:07 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Undefined variable: total_purhcase D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 206
+INFO - 2022-12-07 07:46:07 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/packing_list.php
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Undefined variable: total_purhcase D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 206
+INFO - 2022-12-07 07:46:07 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/packing_list.php
+DEBUG - 2022-12-07 07:46:07 --> Parser class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:46:07 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/top_menu.php
+INFO - 2022-12-07 07:46:07 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_loggedin_info.php
+INFO - 2022-12-07 07:46:07 --> Model "Products" initialized
+INFO - 2022-12-07 13:16:07 --> Model "reports" initialized
+INFO - 2022-12-07 13:16:07 --> Model "Users" initialized
+INFO - 2022-12-07 13:16:07 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_header.php
+INFO - 2022-12-07 13:16:07 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_footer.php
+INFO - 2022-12-07 13:16:07 --> File loaded: D:\wamp\www\R8-Testing\application\views\admin_html_template.php
+INFO - 2022-12-07 13:16:07 --> Final output sent to browser
+DEBUG - 2022-12-07 13:16:07 --> Total execution time: 0.2751
+ERROR - 2022-12-07 07:46:07 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:07 --> Config Class Initialized
+INFO - 2022-12-07 07:46:07 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:07 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:07 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:07 --> URI Class Initialized
+INFO - 2022-12-07 07:46:07 --> Router Class Initialized
+INFO - 2022-12-07 07:46:07 --> Output Class Initialized
+INFO - 2022-12-07 07:46:07 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:07 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:07 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:07 --> CSRF token verified
+INFO - 2022-12-07 07:46:07 --> Input Class Initialized
+INFO - 2022-12-07 07:46:07 --> Language Class Initialized
+INFO - 2022-12-07 07:46:07 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:07 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:07 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:07 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:07 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:07 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:07 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:07 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:07 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:07 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:07 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:07 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:07 --> Model "Web_settings" initialized
+DEBUG - 2022-12-07 07:46:07 --> Auth class already loaded. Second attempt ignored.
+DEBUG - 2022-12-07 07:46:07 --> Session class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:46:07 --> Model "Customers" initialized
+INFO - 2022-12-07 07:46:07 --> Model "Invoices" initialized
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1202
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Trying to get property 'menu' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1202
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1203
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Trying to get property 'submenu' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1203
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1204
+ERROR - 2022-12-07 07:46:07 --> Severity: Notice --> Trying to get property 'setting' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1204
+INFO - 2022-12-07 07:46:07 --> Final output sent to browser
+DEBUG - 2022-12-07 07:46:07 --> Total execution time: 0.0131
+ERROR - 2022-12-07 07:46:11 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:11 --> Config Class Initialized
+INFO - 2022-12-07 07:46:11 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:11 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:11 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:11 --> URI Class Initialized
+INFO - 2022-12-07 07:46:11 --> Router Class Initialized
+INFO - 2022-12-07 07:46:11 --> Output Class Initialized
+INFO - 2022-12-07 07:46:11 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:11 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:11 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:11 --> Input Class Initialized
+INFO - 2022-12-07 07:46:11 --> Language Class Initialized
+INFO - 2022-12-07 07:46:11 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:11 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:11 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:11 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:11 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:11 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:11 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:11 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:11 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:11 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:11 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:11 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:11 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:46:11 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:46:11 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:46:11 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/editpackinglist.php
+DEBUG - 2022-12-07 07:46:11 --> Parser class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:46:11 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/top_menu.php
+INFO - 2022-12-07 07:46:11 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_loggedin_info.php
+INFO - 2022-12-07 07:46:11 --> Model "Products" initialized
+INFO - 2022-12-07 13:16:11 --> Model "reports" initialized
+INFO - 2022-12-07 13:16:11 --> Model "Users" initialized
+INFO - 2022-12-07 13:16:11 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_header.php
+INFO - 2022-12-07 13:16:11 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_footer.php
+INFO - 2022-12-07 13:16:11 --> File loaded: D:\wamp\www\R8-Testing\application\views\admin_html_template.php
+INFO - 2022-12-07 13:16:11 --> Final output sent to browser
+DEBUG - 2022-12-07 13:16:11 --> Total execution time: 0.3173
+ERROR - 2022-12-07 07:46:18 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:18 --> Config Class Initialized
+INFO - 2022-12-07 07:46:18 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:18 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:18 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:18 --> URI Class Initialized
+INFO - 2022-12-07 07:46:18 --> Router Class Initialized
+INFO - 2022-12-07 07:46:18 --> Output Class Initialized
+INFO - 2022-12-07 07:46:18 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:18 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:18 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:18 --> CSRF token verified
+INFO - 2022-12-07 07:46:18 --> Input Class Initialized
+INFO - 2022-12-07 07:46:18 --> Language Class Initialized
+INFO - 2022-12-07 07:46:18 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:18 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:18 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:18 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:18 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:18 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:18 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:18 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:18 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:18 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:18 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:18 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:18 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:46:18 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:46:18 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:46:18 --> Final output sent to browser
+DEBUG - 2022-12-07 07:46:18 --> Total execution time: 0.1685
+ERROR - 2022-12-07 07:46:21 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:21 --> Config Class Initialized
+INFO - 2022-12-07 07:46:21 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:21 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:21 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:21 --> URI Class Initialized
+INFO - 2022-12-07 07:46:21 --> Router Class Initialized
+INFO - 2022-12-07 07:46:21 --> Output Class Initialized
+INFO - 2022-12-07 07:46:21 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:21 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:21 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:21 --> Input Class Initialized
+INFO - 2022-12-07 07:46:21 --> Language Class Initialized
+INFO - 2022-12-07 07:46:21 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:21 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:21 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:21 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:21 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:21 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:21 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:21 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:21 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:21 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:21 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:21 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:21 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:46:21 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:46:21 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:46:21 --> Model "Invoice_design" initialized
+INFO - 2022-12-07 07:46:21 --> Model "Invoice_content" initialized
+INFO - 2022-12-07 07:46:21 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/packing_invoice_html.php
+DEBUG - 2022-12-07 07:46:21 --> Parser class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:46:21 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/top_menu.php
+INFO - 2022-12-07 07:46:21 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_loggedin_info.php
+INFO - 2022-12-07 07:46:21 --> Model "Products" initialized
+INFO - 2022-12-07 13:16:21 --> Model "reports" initialized
+INFO - 2022-12-07 13:16:21 --> Model "Users" initialized
+INFO - 2022-12-07 13:16:21 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_header.php
+INFO - 2022-12-07 13:16:21 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_footer.php
+INFO - 2022-12-07 13:16:21 --> File loaded: D:\wamp\www\R8-Testing\application\views\admin_html_template.php
+INFO - 2022-12-07 13:16:21 --> Final output sent to browser
+DEBUG - 2022-12-07 13:16:21 --> Total execution time: 0.2917
+ERROR - 2022-12-07 07:46:32 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:32 --> Config Class Initialized
+INFO - 2022-12-07 07:46:32 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:32 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:32 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:32 --> URI Class Initialized
+INFO - 2022-12-07 07:46:32 --> Router Class Initialized
+INFO - 2022-12-07 07:46:32 --> Output Class Initialized
+INFO - 2022-12-07 07:46:32 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:32 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:32 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:32 --> Input Class Initialized
+INFO - 2022-12-07 07:46:32 --> Language Class Initialized
+INFO - 2022-12-07 07:46:32 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:32 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:32 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:32 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:32 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:32 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:32 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:32 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:32 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:32 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:32 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:32 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:32 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:46:32 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:46:32 --> Final output sent to browser
+DEBUG - 2022-12-07 07:46:32 --> Total execution time: 0.0590
+ERROR - 2022-12-07 07:46:34 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:34 --> Config Class Initialized
+INFO - 2022-12-07 07:46:34 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:34 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:34 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:34 --> URI Class Initialized
+INFO - 2022-12-07 07:46:34 --> Router Class Initialized
+INFO - 2022-12-07 07:46:34 --> Output Class Initialized
+INFO - 2022-12-07 07:46:34 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:34 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:34 --> Input Class Initialized
+INFO - 2022-12-07 07:46:34 --> Language Class Initialized
+INFO - 2022-12-07 07:46:34 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:34 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:34 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:34 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:34 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:34 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:34 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:34 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:34 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:34 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:34 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:34 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:34 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:46:34 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:46:34 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:46:34 --> Model "Categories" initialized
+INFO - 2022-12-07 07:46:34 --> Model "Units" initialized
+ERROR - 2022-12-07 07:46:34 --> Severity: Notice --> Undefined variable: expense D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:46:34 --> Severity: Notice --> Trying to access array offset on value of type null D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:46:34 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:46:34 --> Severity: Notice --> Undefined variable: total_purhcase D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 206
+INFO - 2022-12-07 07:46:34 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/packing_list.php
+ERROR - 2022-12-07 07:46:34 --> Severity: Notice --> Undefined variable: total_purhcase D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 206
+INFO - 2022-12-07 07:46:34 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/packing_list.php
+DEBUG - 2022-12-07 07:46:34 --> Parser class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:46:34 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/top_menu.php
+INFO - 2022-12-07 07:46:34 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_loggedin_info.php
+INFO - 2022-12-07 07:46:34 --> Model "Products" initialized
+INFO - 2022-12-07 13:16:34 --> Model "reports" initialized
+INFO - 2022-12-07 13:16:34 --> Model "Users" initialized
+INFO - 2022-12-07 13:16:35 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_header.php
+INFO - 2022-12-07 13:16:35 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_footer.php
+INFO - 2022-12-07 13:16:35 --> File loaded: D:\wamp\www\R8-Testing\application\views\admin_html_template.php
+INFO - 2022-12-07 13:16:35 --> Final output sent to browser
+DEBUG - 2022-12-07 13:16:35 --> Total execution time: 0.2572
+ERROR - 2022-12-07 07:46:35 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:46:35 --> Config Class Initialized
+INFO - 2022-12-07 07:46:35 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:46:35 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:46:35 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:46:35 --> URI Class Initialized
+INFO - 2022-12-07 07:46:35 --> Router Class Initialized
+INFO - 2022-12-07 07:46:35 --> Output Class Initialized
+INFO - 2022-12-07 07:46:35 --> Security Class Initialized
+DEBUG - 2022-12-07 07:46:35 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:46:35 --> CSRF cookie sent
+INFO - 2022-12-07 07:46:35 --> CSRF token verified
+INFO - 2022-12-07 07:46:35 --> Input Class Initialized
+INFO - 2022-12-07 07:46:35 --> Language Class Initialized
+INFO - 2022-12-07 07:46:35 --> Loader Class Initialized
+INFO - 2022-12-07 07:46:35 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:46:35 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:46:35 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:46:35 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:46:35 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:46:35 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:46:35 --> Parser Class Initialized
+INFO - 2022-12-07 07:46:35 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:46:35 --> Pagination Class Initialized
+INFO - 2022-12-07 07:46:35 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:46:35 --> Controller Class Initialized
+INFO - 2022-12-07 07:46:35 --> Model "Web_settings" initialized
+DEBUG - 2022-12-07 07:46:35 --> Auth class already loaded. Second attempt ignored.
+DEBUG - 2022-12-07 07:46:35 --> Session class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:46:35 --> Model "Customers" initialized
+INFO - 2022-12-07 07:46:35 --> Model "Invoices" initialized
+ERROR - 2022-12-07 07:46:35 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1202
+ERROR - 2022-12-07 07:46:35 --> Severity: Notice --> Trying to get property 'menu' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1202
+ERROR - 2022-12-07 07:46:35 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1203
+ERROR - 2022-12-07 07:46:35 --> Severity: Notice --> Trying to get property 'submenu' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1203
+ERROR - 2022-12-07 07:46:35 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1204
+ERROR - 2022-12-07 07:46:35 --> Severity: Notice --> Trying to get property 'setting' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1204
+INFO - 2022-12-07 07:46:35 --> Final output sent to browser
+DEBUG - 2022-12-07 07:46:35 --> Total execution time: 0.0148
+ERROR - 2022-12-07 07:47:01 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:47:01 --> Config Class Initialized
+INFO - 2022-12-07 07:47:01 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:47:01 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:47:01 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:47:01 --> URI Class Initialized
+INFO - 2022-12-07 07:47:01 --> Router Class Initialized
+INFO - 2022-12-07 07:47:01 --> Output Class Initialized
+INFO - 2022-12-07 07:47:01 --> Security Class Initialized
+DEBUG - 2022-12-07 07:47:01 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:47:01 --> CSRF cookie sent
+INFO - 2022-12-07 07:47:01 --> Input Class Initialized
+INFO - 2022-12-07 07:47:01 --> Language Class Initialized
+INFO - 2022-12-07 07:47:01 --> Loader Class Initialized
+INFO - 2022-12-07 07:47:01 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:47:01 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:47:01 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:47:01 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:47:01 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:47:01 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:47:01 --> Parser Class Initialized
+INFO - 2022-12-07 07:47:01 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:47:01 --> Pagination Class Initialized
+INFO - 2022-12-07 07:47:01 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:47:01 --> Controller Class Initialized
+INFO - 2022-12-07 07:47:01 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:47:01 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:47:01 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:47:01 --> Model "Categories" initialized
+INFO - 2022-12-07 07:47:01 --> Model "Units" initialized
+INFO - 2022-12-07 07:47:01 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/add_packing_list.php
+DEBUG - 2022-12-07 07:47:01 --> Parser class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:47:01 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/top_menu.php
+INFO - 2022-12-07 07:47:01 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_loggedin_info.php
+INFO - 2022-12-07 07:47:01 --> Model "Products" initialized
+INFO - 2022-12-07 13:17:01 --> Model "reports" initialized
+INFO - 2022-12-07 13:17:01 --> Model "Users" initialized
+INFO - 2022-12-07 13:17:01 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_header.php
+INFO - 2022-12-07 13:17:01 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_footer.php
+INFO - 2022-12-07 13:17:01 --> File loaded: D:\wamp\www\R8-Testing\application\views\admin_html_template.php
+INFO - 2022-12-07 13:17:01 --> Final output sent to browser
+DEBUG - 2022-12-07 13:17:01 --> Total execution time: 0.3442
+ERROR - 2022-12-07 07:47:10 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:47:10 --> Config Class Initialized
+INFO - 2022-12-07 07:47:10 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:47:10 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:47:10 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:47:10 --> URI Class Initialized
+INFO - 2022-12-07 07:47:10 --> Router Class Initialized
+INFO - 2022-12-07 07:47:10 --> Output Class Initialized
+INFO - 2022-12-07 07:47:10 --> Security Class Initialized
+DEBUG - 2022-12-07 07:47:10 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:47:10 --> CSRF cookie sent
+INFO - 2022-12-07 07:47:10 --> CSRF token verified
+INFO - 2022-12-07 07:47:10 --> Input Class Initialized
+INFO - 2022-12-07 07:47:10 --> Language Class Initialized
+INFO - 2022-12-07 07:47:10 --> Loader Class Initialized
+INFO - 2022-12-07 07:47:10 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:47:10 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:47:10 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:47:10 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:47:10 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:47:10 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:47:10 --> Parser Class Initialized
+INFO - 2022-12-07 07:47:10 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:47:10 --> Pagination Class Initialized
+INFO - 2022-12-07 07:47:10 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:47:10 --> Controller Class Initialized
+INFO - 2022-12-07 07:47:10 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:47:10 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:47:10 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:47:10 --> Final output sent to browser
+DEBUG - 2022-12-07 07:47:10 --> Total execution time: 0.1238
+ERROR - 2022-12-07 07:47:16 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:47:16 --> Config Class Initialized
+INFO - 2022-12-07 07:47:16 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:47:16 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:47:16 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:47:16 --> URI Class Initialized
+INFO - 2022-12-07 07:47:16 --> Router Class Initialized
+INFO - 2022-12-07 07:47:16 --> Output Class Initialized
+INFO - 2022-12-07 07:47:16 --> Security Class Initialized
+DEBUG - 2022-12-07 07:47:16 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:47:16 --> CSRF cookie sent
+INFO - 2022-12-07 07:47:16 --> Input Class Initialized
+INFO - 2022-12-07 07:47:16 --> Language Class Initialized
+INFO - 2022-12-07 07:47:16 --> Loader Class Initialized
+INFO - 2022-12-07 07:47:16 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:47:16 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:47:16 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:47:16 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:47:16 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:47:16 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:47:16 --> Parser Class Initialized
+INFO - 2022-12-07 07:47:16 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:47:16 --> Pagination Class Initialized
+INFO - 2022-12-07 07:47:16 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:47:16 --> Controller Class Initialized
+INFO - 2022-12-07 07:47:16 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:47:16 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:47:16 --> Final output sent to browser
+DEBUG - 2022-12-07 07:47:16 --> Total execution time: 0.0715
+ERROR - 2022-12-07 07:47:18 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:47:18 --> Config Class Initialized
+INFO - 2022-12-07 07:47:18 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:47:18 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:47:18 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:47:18 --> URI Class Initialized
+INFO - 2022-12-07 07:47:18 --> Router Class Initialized
+INFO - 2022-12-07 07:47:18 --> Output Class Initialized
+INFO - 2022-12-07 07:47:18 --> Security Class Initialized
+DEBUG - 2022-12-07 07:47:18 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:47:18 --> CSRF cookie sent
+INFO - 2022-12-07 07:47:18 --> Input Class Initialized
+INFO - 2022-12-07 07:47:18 --> Language Class Initialized
+INFO - 2022-12-07 07:47:18 --> Loader Class Initialized
+INFO - 2022-12-07 07:47:18 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:47:18 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:47:18 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:47:18 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:47:18 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:47:18 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:47:18 --> Parser Class Initialized
+INFO - 2022-12-07 07:47:18 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:47:18 --> Pagination Class Initialized
+INFO - 2022-12-07 07:47:18 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:47:18 --> Controller Class Initialized
+INFO - 2022-12-07 07:47:18 --> Model "Accounts_model" initialized
+INFO - 2022-12-07 07:47:18 --> Model "Web_settings" initialized
+INFO - 2022-12-07 07:47:18 --> Model "Purchases" initialized
+INFO - 2022-12-07 07:47:18 --> Model "Categories" initialized
+INFO - 2022-12-07 07:47:18 --> Model "Units" initialized
+ERROR - 2022-12-07 07:47:18 --> Severity: Notice --> Undefined variable: expense D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:47:18 --> Severity: Notice --> Trying to access array offset on value of type null D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:47:18 --> Severity: Warning --> count(): Parameter must be an array or an object that implements Countable D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 156
+ERROR - 2022-12-07 07:47:18 --> Severity: Notice --> Undefined variable: total_purhcase D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 206
+INFO - 2022-12-07 07:47:18 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/packing_list.php
+ERROR - 2022-12-07 07:47:19 --> Severity: Notice --> Undefined variable: total_purhcase D:\wamp\www\R8-Testing\application\views\purchase\packing_list.php 206
+INFO - 2022-12-07 07:47:19 --> File loaded: D:\wamp\www\R8-Testing\application\views\purchase/packing_list.php
+DEBUG - 2022-12-07 07:47:19 --> Parser class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:47:19 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/top_menu.php
+INFO - 2022-12-07 07:47:19 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_loggedin_info.php
+INFO - 2022-12-07 07:47:19 --> Model "Products" initialized
+INFO - 2022-12-07 13:17:19 --> Model "reports" initialized
+INFO - 2022-12-07 13:17:19 --> Model "Users" initialized
+INFO - 2022-12-07 13:17:19 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_header.php
+INFO - 2022-12-07 13:17:19 --> File loaded: D:\wamp\www\R8-Testing\application\views\include/admin_footer.php
+INFO - 2022-12-07 13:17:19 --> File loaded: D:\wamp\www\R8-Testing\application\views\admin_html_template.php
+INFO - 2022-12-07 13:17:19 --> Final output sent to browser
+DEBUG - 2022-12-07 13:17:19 --> Total execution time: 0.2507
+ERROR - 2022-12-07 07:47:19 --> $config['composer_autoload'] is set to TRUE but D:\wamp\www\R8-Testing\application\vendor/autoload.php was not found.
+INFO - 2022-12-07 07:47:19 --> Config Class Initialized
+INFO - 2022-12-07 07:47:19 --> Hooks Class Initialized
+DEBUG - 2022-12-07 07:47:19 --> UTF-8 Support Enabled
+INFO - 2022-12-07 07:47:19 --> Utf8 Class Initialized
+INFO - 2022-12-07 07:47:19 --> URI Class Initialized
+INFO - 2022-12-07 07:47:19 --> Router Class Initialized
+INFO - 2022-12-07 07:47:19 --> Output Class Initialized
+INFO - 2022-12-07 07:47:19 --> Security Class Initialized
+DEBUG - 2022-12-07 07:47:19 --> Global POST, GET and COOKIE data sanitized
+INFO - 2022-12-07 07:47:19 --> CSRF cookie sent
+INFO - 2022-12-07 07:47:19 --> CSRF token verified
+INFO - 2022-12-07 07:47:19 --> Input Class Initialized
+INFO - 2022-12-07 07:47:19 --> Language Class Initialized
+INFO - 2022-12-07 07:47:19 --> Loader Class Initialized
+INFO - 2022-12-07 07:47:19 --> Helper loaded: url_helper
+INFO - 2022-12-07 07:47:19 --> Helper loaded: file_helper
+INFO - 2022-12-07 07:47:19 --> Helper loaded: form_helper
+INFO - 2022-12-07 07:47:19 --> Helper loaded: lang_helper
+INFO - 2022-12-07 07:47:19 --> Database Driver Class Initialized
+INFO - 2022-12-07 07:47:19 --> Session: Class initialized using 'files' driver.
+INFO - 2022-12-07 07:47:19 --> Parser Class Initialized
+INFO - 2022-12-07 07:47:19 --> Language file loaded: language/english/pagination_lang.php
+INFO - 2022-12-07 07:47:19 --> Pagination Class Initialized
+INFO - 2022-12-07 07:47:19 --> Form Validation Class Initialized
+INFO - 2022-12-07 07:47:19 --> Controller Class Initialized
+INFO - 2022-12-07 07:47:19 --> Model "Web_settings" initialized
+DEBUG - 2022-12-07 07:47:19 --> Auth class already loaded. Second attempt ignored.
+DEBUG - 2022-12-07 07:47:19 --> Session class already loaded. Second attempt ignored.
+INFO - 2022-12-07 07:47:19 --> Model "Customers" initialized
+INFO - 2022-12-07 07:47:19 --> Model "Invoices" initialized
+ERROR - 2022-12-07 07:47:19 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1202
+ERROR - 2022-12-07 07:47:19 --> Severity: Notice --> Trying to get property 'menu' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1202
+ERROR - 2022-12-07 07:47:19 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1203
+ERROR - 2022-12-07 07:47:19 --> Severity: Notice --> Trying to get property 'submenu' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1203
+ERROR - 2022-12-07 07:47:19 --> Severity: Notice --> Undefined offset: 0 D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1204
+ERROR - 2022-12-07 07:47:19 --> Severity: Notice --> Trying to get property 'setting' of non-object D:\wamp\www\R8-Testing\application\controllers\Cinvoice.php 1204
+INFO - 2022-12-07 07:47:19 --> Final output sent to browser
+DEBUG - 2022-12-07 07:47:19 --> Total execution time: 0.0463

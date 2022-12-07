@@ -643,6 +643,7 @@ $('#download').hide();
     var input_hdn="Your Packing List No :"+$('#invoice_hdn').val()+" has been Discarded";
   
     console.log(input_hdn);
+    $('#myModal3').modal('hide');
     $("#bodyModal1").html(input_hdn);
         $('#exampleModalLong').modal('show');
     window.setTimeout(function(){
