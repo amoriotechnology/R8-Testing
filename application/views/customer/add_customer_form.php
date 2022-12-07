@@ -2,6 +2,7 @@
 <style>
 .img-flag{
   max-height: 11px;
+  display: none;
 }
     </style>
 
@@ -128,18 +129,20 @@
                         <div class="form-group row">
                             <label for="Preferred currency" class="col-sm-4 col-form-label"> Preferred currency<i class="text-danger">*</i></label>
                             <div class="col-sm-8">
-                            <select name="currency1" class="currency" id="currency1" style="width: 100%;"></select>
-      <input type="hidden" name="" id="num" >
-    <div class="right_box" style="display:none;">
-      <select name="currency" class="currency" id="currency2" style="width: 95%;"></select>
-      <input type="hidden" name="" id="ans" disabled>
-    </div>
-  <small id="errorMSG" style="display:none;"></small>
+                            <select name="currency1" class="currency" id="currency1" style="width: 100%;">
+                            <option id="im" value="select preferred currency">select preferred currency</option>
+                            </select>
+                                <input type="hidden" name="" id="num" >
+                                <div class="right_box" style="display:none;">
+                                <select name="currency" class="currency" id="currency2" style="width: 95%;"></select>
+                                <input type="hidden" name="" id="ans" disabled>
+                                </div>
+                            <small id="errorMSG" style="display:none;"></small>
 
-  <br><br>
-</div>
-<div id="pageLoader">
- </div> 
+                            <br><br>
+                            </div>
+                            <div id="pageLoader">
+                            </div> 
                             </div>
   
                     </div>

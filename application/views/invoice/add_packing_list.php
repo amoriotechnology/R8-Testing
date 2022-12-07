@@ -1,3 +1,4 @@
+<!-- Product Purchase js -->
 
 <script src="<?php echo base_url()?>my-assets/js/admin_js/json/product_purchase.js.php" ></script>
 <!-- Supplier Js -->
@@ -6,7 +7,6 @@
 <script src="<?php echo base_url()?>my-assets/js/admin_js/purchase.js" type="text/javascript"></script>
 
 <script src="<?php echo base_url()?>my-assets/js/admin_js/packing.js" type="text/javascript"></script>
-
 
 <!-- Add New Purchase Start -->
 <div class="content-wrapper">
@@ -19,7 +19,8 @@
             <small>Generate New Packing List Invoice</small>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
-                <li><a href="#">Packing List</a></lia                <li class="active">Packing List Invoice</li>
+                <li><a href="#">Packing List</a></li>
+                <li class="active">Packing List Invoice</li>
             </ol>
         </div>
     </section>
@@ -131,14 +132,13 @@
 
         <br>
 
- <input type='button' value='Add Bundle' id="buddle_1"    class="btn btn-primary" onclick="add(); " style="float: right;margin-left: 10px;    margin-right: 33px;
-    margin-top: 12px;margin-bottom: 20px;"  />
+        <input type='button' value='Add Bundle' id="buddle_1"    class="btn btn-primary" onclick="add(); " style="margin-left: 10px;    margin-right: 33px;
+    margin-top: 12px;margin-bottom: 20px;"/>
 <div id='content'>
             <div class="crate_wrap" id="crate_wrap" style="
     border: 1px solid #ddd;
     padding: 6px;
-    margin: 5px;
-">
+    margin: 5px;">
 
 
 
@@ -206,9 +206,9 @@
 
                                 <thead>
                                      <tr>
-                                          <th class="text-center" width="10%">Serial No<i class="text-danger">*</i></th> 
+                                       
                                           
-                                          
+                                     <th class="text-center" width="10%">Serial No<i class="text-danger">*</i></th>
                                             <th class="text-center">SLAB NO</th>
                                             <th class="text-center">Net Measurement (Inches)<i class="text-danger">*</i></th>
                                          <!--    <th class="text-center" id="th_Measurements1" >Set Measurements<i class="text-danger">*</i></th> -->
@@ -323,7 +323,7 @@
 
                        
                     </div>
-                    </div>
+                    </div> 
                         <div class="form-group row">
                             <div class="col-sm-6">
                                <!--  <input type="submit" id="add_purchase" class="btn btn-primary btn-large" name="add-packing-list" value="Save" />
@@ -456,7 +456,7 @@
 </div>
 
 <?php 
-if(isset($_SESSION['packingid']))
+if(isset($_SESSION['packingid'])) 
 {
 
 ?>
@@ -474,9 +474,15 @@ if(isset($_SESSION['packingid']))
 <script type="text/javascript">
     function add()
     {
-        $('#print').append($('#crate_wrap').html());
-        $('#buddle_1').css('display','none');
-        $('#buddle_2').css('display','block');
+        $('#content').append($('#crate_wrap').html());
+        $('#buddle_1').css('display','');
+        $('#buddle_2').css('display','');
+
+
+
+
+
+
         
     }
     function hide()
@@ -498,7 +504,6 @@ $(document).ready(function () {
       
     });
 });
-
 </script>
 
 

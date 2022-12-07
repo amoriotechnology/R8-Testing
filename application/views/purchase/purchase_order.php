@@ -90,7 +90,7 @@ textarea:focus, input:focus{
                                             {/all_supplier}
                                         </select>
                                     </div>
-                                     <a href="#" class="client-add-btn btn btn-info" aria-hidden="true" data-toggle="modal" data-target="#add_vendor"><i class="fa fa-user"></i></a>
+                                    <a href="#" class="client-add-btn btn btn-info" aria-hidden="true" id="model" data-toggle="modal" data-target="#add_vendor"><i class="fa fa-user"></i></a>
                                 </div> 
                             </div>
 
@@ -1013,9 +1013,14 @@ function addPurchaseOrderField2(divName){
     }
 }
 $( document ).ready(function() {
+<<<<<<< HEAD
     $('#final_submit').hide();
 $('#download').hide();
                         $('.hiden').css("display","none");
+=======
+
+    $('.hiden').css("display","none");
+>>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
 
   
 
@@ -1077,6 +1082,7 @@ function(data) {
 
 });
 
+<<<<<<< HEAD
 $('#insert_purchase').submit(function (event) {
     var dataString = {
         dataString : $("#insert_purchase").serialize()
@@ -1189,6 +1195,9 @@ window.onbeforeunload = function(){
        return false;
     }
 }
+=======
+
+>>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
   
 
     </script>

@@ -18,7 +18,7 @@
             <h1>Packing List</h1>
             <small>Generate New Packing List Invoice</small>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="pe-7s-home"></i> <?php echo display('home') ?><?php echo $_SESSION['expense_packing_id']; ?></a></li>
+            <li><a href="<?php   echo base_url(); ?>"><i class="pe-7s-home"></i> <?php echo display('home') ?></a></li>
                 <li><a href="#">Packing List</a></li>
                 <li class="active">Packing List Invoice</li>
             </ol>
@@ -432,6 +432,15 @@
 
 
 
+<<<<<<< HEAD
+=======
+
+<!-- <?php 
+
+    if($_SESSION['expense_packing_id'])
+        { ?>
+
+>>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
     <script type="text/javascript">
         var csrfName = '<?php echo $this->security->get_csrf_token_name();?>';
 var csrfHash = '<?php echo $this->security->get_csrf_hash();?>';
@@ -443,7 +452,11 @@ $('#download').hide();
        //    hide();
         });
     </script>
+<<<<<<< HEAD
    
+=======
+    <?php } ?> -->
+>>>>>>> 1aea0f6a65819f2c47e1cde06fbcdf8bca6e6c51
 
 <script type="text/javascript">
 

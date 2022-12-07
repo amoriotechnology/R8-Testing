@@ -409,22 +409,19 @@ class reports extends CI_Model {
         return false;
     }
     public function total_sales_product() {
-     
         $this->db->select("*");
         $this->db->from('invoice_details');
-     
         $this->db->where('create_by',$this->session->userdata('user_id'));
-   
         $query = $this->db->get();
-      
+        // echo $this->db->last_query(); die();
         if ($query->num_rows() > 0) {
             return $query->num_rows();
         }
-        return false;
+        // return false;
     }
     public function chart($start,$end) {
      
-     $val=      $this->db->select("*")
+     $val=  $this->db->select("*")
          ->from('invoice')
          ->where('sales_by',$this->session->userdata('user_id'))
        ->where('date >=', $start)
